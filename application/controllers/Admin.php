@@ -227,6 +227,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -1231,6 +1233,28 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function caripentan()
+    {
+		if ($this->session->userdata('role') != 1) {
+			redirect('auth');
+		}
+        $data['title'] = 'Penilaian Tanah';
+		$data['active'] = 'hasil';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM penilaian_tanah where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/penilaiantanah', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
     public function tambahpentan()
     {
 		if ($this->session->userdata('role') != 1) {
@@ -1350,6 +1374,28 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function carihamus()
+    {
+		if ($this->session->userdata('role') != 1) {
+			redirect('auth');
+		}
+        $data['title'] = 'Hasil Musyawarah';
+		$data['active'] = 'hasil';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM hasil_musyawarah where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/hasilmusyawarah', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
     public function tambahhamus()
     {
 		if ($this->session->userdata('role') != 1) {
@@ -1458,6 +1504,28 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/sidebar', $data);
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/pelepasanhak', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function caripelhak()
+    {
+		if ($this->session->userdata('role') != 1) {
+			redirect('auth');
+		}
+        $data['title'] = 'Pelepasan Hak';
+		$data['active'] = 'hasil';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM pelepasan_hak where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/pelepasanhak', $data);
 		$this->load->view('admin/templates/footer', $data);
     }
 
