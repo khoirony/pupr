@@ -11,8 +11,30 @@
             <form class="user" method="POST" action="">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
-                    <input type="text" class="form-control form-control-user" id="id_bidang_tanah" name="id_bidang_tanah">
+                    <select class="custom-select rounded-pill px-3" id="id_bidang_tanah" name="id_bidang_tanah">
+                        <?php
+                        foreach ($bidang_tanah as $bidtan) {
+                        ?>
+                        <option value="<?= $bidtan['id_bidang_tanah']; ?>"><?= $bidtan['id_bidang_tanah']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('id_bidang_tanah', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Nama Penggarap</p>
+                    <select class="custom-select rounded-pill px-3" id="nama_penggarap" name="nama_penggarap">
+                        <?php
+                        foreach ($pelaksana as $pel) {
+                        ?>
+                        <option value="<?= $pel['nama_pelaksana']; ?>"><?= $pel['nama_pelaksana']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <?= form_error('nama_penggarap', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="form-group text-start">
@@ -41,13 +63,29 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Desa/Kelurahan</p>
-                    <input type="text" class="form-control form-control-user" id="id_lokasi" name="id_lokasi">
+                    <select class="custom-select rounded-pill px-3" id="id_lokasi" name="id_lokasi">
+                        <?php
+                        foreach ($lokasi as $lok) {
+                        ?>
+                        <option value="<?= $lok['desa_kelurahan']; ?>"><?= $lok['desa_kelurahan']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('id_lokasi', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Jenis Ganti Rugi</p>
-                    <input type="text" class="form-control form-control-user" id="id_musyawarah" name="id_musyawarah">
+                    <select class="custom-select rounded-pill px-3" id="id_musyawarah" name="id_musyawarah">
+                        <?php
+                        foreach ($hasil_musyawarah as $hamus) {
+                        ?>
+                        <option value="<?= $hamus['jenis_ganti_rugi']; ?>"><?= $hamus['jenis_ganti_rugi']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('id_musyawarah', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
