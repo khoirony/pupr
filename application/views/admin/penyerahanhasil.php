@@ -42,14 +42,14 @@
 				<tr>
 					<th scope="row"><?= $no++; ?></th>
 					<td><?= $peha['id_bidang_tanah']; ?></td>
-					<td><?= $peha['id_pelepasan']; ?></td>
+					<td><?= $peha['nama_penggarap']; ?></td>
 					<td><?= $peha['id_lokasi']; ?></td>
 					<td><?= $peha['id_pelepasan']; ?></td>
-					<td><?= $peha['id_pelepasan']; ?></td>
-					<td><?= $peha['id_pelepasan']; ?></td>
+					<td><?= $peha['tgl_kwitansi']; ?></td>
+					<td><?= $peha['tgl_pembayaran']; ?></td>
                     <td class="text-center" style="width:100px;">
-                        <a href="<?= base_url('Admin/editpenhas/' . $peha['id_pelepasan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="<?= base_url('Admin/hapuspenhas/' . $peha['id_pelepasan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        <a href="<?= base_url('Admin/editpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        <a href="<?= base_url('Admin/hapuspenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
 				</tr>
 				<?php

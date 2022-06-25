@@ -20,6 +20,11 @@ class Admin extends CI_Controller
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['hitung_bidtan'] = $this->db->get('bidang_tanah')->num_rows();
+        $data['hitung_lokasi'] = $this->db->get('lokasi')->num_rows();
+        $data['hitung_pentan'] = $this->db->get('penilaian_tanah')->num_rows();
+        $data['hitung_penhas'] = $this->db->get('penyerahan_hasil')->num_rows();
+
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
 		$this->load->view('admin/templates/topbar', $data);
@@ -1698,17 +1703,19 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nama_penggarap', 'Nama Penggarap', 'required');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
-        $this->form_validation->set_rules('tanggal_kwitansi', 'Tanggal Kwitansi', 'required');
-        $this->form_validation->set_rules('tanggal_pembayaran', 'Tanggal Pemayaran', 'required');
         $this->form_validation->set_rules('id_lokasi', 'Desa/Kelurahan', 'required');
-        $this->form_validation->set_rules('id_musyawarah', 'Jenis Ganti Rugi', 'required');
-        $this->form_validation->set_rules('nomor_rekening', 'Nomor Rekening', 'required');
-        $this->form_validation->set_rules('nama_bank', 'Nama Bank', 'required');
 
         $data['title'] = 'Tambah Penyerahan Hasil';
 		$data['active'] = 'hasil';
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
+        $data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $data['lokasi'] = $this->db->get('lokasi')->result_array();
+
+        $pelhak = $this->db->get_where('pelepasan_hak', ['nomor_kwitansi' => $this->input->post('nomor_kwitansi')])->row_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -1721,12 +1728,9 @@ class Admin extends CI_Controller
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
                 'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
 				'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
-                'nomor_kwitansi' => htmlspecialchars($this->input->post('nomor_kwitansi', true)),
-                'tanggal_kwitansi' => htmlspecialchars($this->input->post('tanggal_kwitansi', true)),
-				'tanggal_pembayaran' => htmlspecialchars($this->input->post('tanggal_pembayaran', true)),
-                'id_musyawarah' => htmlspecialchars($this->input->post('id_musyawarah', true)),
-                'nomor_rekening' => htmlspecialchars($this->input->post('nomor_rekening', true)),
-                'nama_bank' => htmlspecialchars($this->input->post('nama_bank', true)),
+                'id_pelepasan' => htmlspecialchars($this->input->post('nomor_kwitansi', true)),
+                'tgl_kwitansi' => $pelhak['tanggal_kwitansi'],
+				'tgl_pembayaran' => $pelhak['tanggal_pembayaran']
             ];
 
             $this->db->insert('penyerahan_hasil', $data);

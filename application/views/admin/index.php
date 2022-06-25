@@ -12,7 +12,7 @@
                 </div>
                 <h5 class="card-title">Data Bidang Tanah</h5>
                 <div class="display-4">
-                    27
+                    <?= $hitung_bidtan;?>
                 </div>
                 <a href="<?= base_url('Admin/verif'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
@@ -27,7 +27,7 @@
                 </div>
                 <h5 class="card-title">Data Lokasi</h5>
                 <div class="display-4">
-                    32
+                    <?= $hitung_lokasi;?>
                 </div>
                 <a href="<?= base_url('Admin/verif'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
@@ -42,7 +42,7 @@
                 </div>
                 <h5 class="card-title">Data Penilaian Tanah</h5>
                 <div class="display-4">
-                    24
+                    <?= $hitung_pentan;?>
                 </div>
                 <a href="<?= base_url('Admin/verif'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
@@ -57,7 +57,7 @@
                 </div>
                 <h5 class="card-title">Data Penyerahan Hasil</h5>
                 <div class="display-4">
-                    52
+                    <?= $hitung_penhas;?>
                 </div>
                 <a href="<?= base_url('Admin/pengumuman'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
