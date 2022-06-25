@@ -10,15 +10,23 @@
         <div class="col-md-10 text-center">
             <form class="user" method="POST" action="">
                 <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Nomor Pengumuman</p>
-                    <input type="text" class="form-control form-control-user" id="nomor_pengumuman" name="nomor_pengumuman">
-                    <?= form_error('nomor_pengumuman', '<small class="text-danger pl-3">', '</small>'); ?>
+                    <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
+                    <select class="custom-select rounded-pill px-3" id="id_bidang_tanah" name="id_bidang_tanah">
+                        <?php
+                        foreach ($bidang_tanah as $bidtan) {
+                        ?>
+                        <option value="<?= $bidtan['id_bidang_tanah']; ?>"><?= $bidtan['id_bidang_tanah']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <?= form_error('id_bidang_tanah', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
-                    <input type="text" class="form-control form-control-user" id="id_bidang_tanah" name="id_bidang_tanah">
-                    <?= form_error('id_bidang_tanah', '<small class="text-danger pl-3">', '</small>'); ?>
+                    <p class="ms-3 mb-0">Nomor Pengumuman</p>
+                    <input type="text" class="form-control form-control-user" id="nomor_pengumuman" name="nomor_pengumuman">
+                    <?= form_error('nomor_pengumuman', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="form-group text-start">
@@ -41,7 +49,15 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Berita Acara</p>
-                    <input type="text" class="form-control form-control-user" id="id_berita" name="id_berita">
+                    <select class="custom-select rounded-pill px-3" id="id_berita" name="id_berita">
+                        <?php
+                        foreach ($berita_acara as $berac) {
+                        ?>
+                        <option value="<?= $berac['nomor_berita']; ?>"><?= $berac['nomor_berita']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('id_berita', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

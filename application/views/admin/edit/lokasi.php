@@ -11,7 +11,16 @@
             <form class="user" method="POST" action="">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Penlok</p>
-                    <input type="text" class="form-control form-control-user" id="nomor_penlok" name="nomor_penlok" value="<?= $lokasi['id_penlok'];?>">
+                    <select class="custom-select rounded-pill px-3" id="nomor_penlok" name="nomor_penlok">
+                        <option value="<?= $lokasi['id_penlok'];?>"><?= $lokasi['id_penlok'];?></option>
+                        <?php
+                        foreach ($penetapan_lokasi as $penlok) {
+                        ?>
+                        <option value="<?= $penlok['id_penlok']; ?>"><?= $penlok['id_penlok']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('nomor_penlok', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

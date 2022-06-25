@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Tambah Kegiatan</h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Tambah Bidang Tanah</h1>
     <br>
 
     <div class="row justify-content-center">
@@ -11,7 +11,15 @@
             <form class="user" method="POST" action="">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Penlok</p>
-                    <input type="text" class="form-control form-control-user" id="nomor_penlok" name="nomor_penlok">
+                    <select class="custom-select rounded-pill px-3" id="nomor_penlok" name="nomor_penlok">
+                        <?php
+                        foreach ($penetapan_lokasi as $penlok) {
+                        ?>
+                        <option value="<?= $penlok['id_penlok']; ?>"><?= $penlok['id_penlok']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('nomor_penlok', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

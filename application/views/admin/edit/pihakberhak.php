@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Tambah Pihak Berhak</h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Edit Pihak Berhak</h1>
     <br>
 
     <div class="row justify-content-center">
@@ -11,7 +11,16 @@
             <form class="user" method="POST" action="">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
-                    <input type="text" class="form-control form-control-user" id="id_bidang_tanah" name="id_bidang_tanah" value="<?= $pihber['id_bidang_tanah'];?>">
+                    <select class="custom-select rounded-pill px-3" id="id_bidang_tanah" name="id_bidang_tanah">
+                        <option value="<?= $pihber['id_bidang_tanah'];?>"><?= $pihber['id_bidang_tanah'];?></option>
+                        <?php
+                        foreach ($bidang_tanah as $bidtan) {
+                        ?>
+                        <option value="<?= $bidtan['id_bidang_tanah']; ?>"><?= $bidtan['id_bidang_tanah']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('id_bidang_tanah', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

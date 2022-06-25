@@ -29,7 +29,16 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Kegiatan</p>
-                    <input type="text" class="form-control form-control-user" id="kegiatan" name="kegiatan" value="<?= $pelaksana['id_kegiatan'];?>">
+                    <select class="custom-select rounded-pill px-3" id="kegiatan" name="kegiatan">
+                        <option value="<?= $pelaksana['id_kegiatan'];?>"><?= $pelaksana['id_kegiatan'];?></option>
+                        <?php
+                        foreach ($kegiatan as $keg) {
+                        ?>
+                        <option value="<?= $keg['nama_kegiatan']; ?>"><?= $keg['nama_kegiatan']; ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
                     <?= form_error('kegiatan', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

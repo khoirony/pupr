@@ -266,6 +266,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+
 		$data['lokasi'] = $this->db->get_where('lokasi', ['id_lokasi' => $id])->row_array();
 
         if ($this->form_validation->run() == false) {
@@ -356,6 +358,8 @@ class Admin extends CI_Controller
 		$data['active'] = 'perencanaan';
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -485,6 +489,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -500,7 +506,6 @@ class Admin extends CI_Controller
                 'desa_kelurahan' => htmlspecialchars($this->input->post('desa_kelurahan', true)),
 				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
 				'kabupaten_kota' => htmlspecialchars($this->input->post('kabupaten_kota', true)),
-				'id_pelaksana' => '82391'
             ];
 
             $this->db->insert('kegiatan', $data);
@@ -528,6 +533,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['kegiatan'] = $this->db->get_where('kegiatan', ['id_kegiatan' => $id])->row_array();
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -625,6 +631,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -669,6 +677,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['bidtan'] = $this->db->get_where('bidang_tanah', ['id_bidang_tanah' => $id])->row_array();
+        $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -761,6 +770,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -795,6 +806,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['alha'] = $this->db->get_where('alas_hak', ['id_alas_hak' => $id])->row_array();
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -885,6 +897,8 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -925,6 +939,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pihber'] = $this->db->get_where('pihak_berhak', ['id_pihak' => $id])->row_array();
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -1018,6 +1033,9 @@ class Admin extends CI_Controller
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['berita_acara'] = $this->db->get('berita_acara')->result_array();
+
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
             $this->load->view('admin/templates/sidebar', $data);
@@ -1058,6 +1076,8 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pengumuman'] = $this->db->get_where('pengumuman', ['id_pengumuman' => $id])->row_array();
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['berita_acara'] = $this->db->get('berita_acara')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -1147,6 +1167,8 @@ class Admin extends CI_Controller
 		$data['active'] = 'hasil';
         $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['pengumuman'] = $this->db->get('pengumuman')->result_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
