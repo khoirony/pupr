@@ -17,8 +17,12 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpihber'); ?>">Tambah Pihak Berhak</a>
-            </div>
+				<?php if($user['role'] != 1){?>
+					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpihber'); ?>">Tambah Pihak Berhak</a>
+				<?php
+					}
+				?>
+			</div>
         </div>
     </div>
     <table class="table table-striped table-bordered table-hover">
@@ -31,7 +35,11 @@
 					<th scope="col">Tanggal Lahir</th>
 					<th scope="col">Alamat</th>
 					<th scope="col">Kepemilikan</th>
+                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
+					<?php
+						}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,10 +55,14 @@
 					<td><?= $pihber['tanggal_lahir']; ?></td>
 					<td><?= $pihber['alamat']; ?></td>
 					<td><?= $pihber['kepemilikan']; ?></td>
+					<?php if($user['role'] != 1){?>
 					<td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editpihber/' . $pihber['id_pihak']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspihber/' . $pihber['id_pihak']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
+					<?php
+						}
+					?>
 				</tr>
 				<?php
 				}

@@ -17,8 +17,12 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpelaksana'); ?>">Tambah Pelaksana</a>
-            </div>
+				<?php if($user['role'] != 1){?>
+					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpelaksana'); ?>">Tambah Pelaksana</a>
+				<?php
+					}
+				?>
+			</div>
         </div>
     </div>
     <table class="table table-striped table-bordered table-hover">
@@ -29,7 +33,11 @@
 					<th scope="col">Nama</th>
 					<th scope="col">Satgas</th>
 					<th scope="col">Kegiatan</th>
+                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
+					<?php
+						}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,10 +51,14 @@
 					<td><?= $pel['nama_pelaksana']; ?></td>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
+					<?php if($user['role'] != 1){?>
 					<td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
+					<?php
+						}
+					?>
 				</tr>
 				<?php
 				}
