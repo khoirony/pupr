@@ -12,7 +12,7 @@ class Auth extends CI_Controller
 
 	public function index()
     {
-		// $this->session->unset_userdata('username');
+		// $this->session->sess_destroy();
         $data['title'] = 'PUPR SNVT PJPA';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -27,6 +27,8 @@ class Auth extends CI_Controller
 		if ($this->session->userdata('role') == 1) {
 			redirect('admin');
 		}else if ($this->session->userdata('role') == 2){
+			redirect('admin');
+		}else if ($this->session->userdata('role') == 3){
 			redirect('auth');
 		}
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -60,6 +62,8 @@ class Auth extends CI_Controller
 
 				if($user['role'] == 1){
 					redirect('admin');
+				}else if($user['role'] == 2){
+					redirect('admin');
 				}else{
 					redirect('auth');
 				}
@@ -78,8 +82,11 @@ class Auth extends CI_Controller
 		if ($this->session->userdata('role') == 1) {
 			redirect('admin');
 		}else if ($this->session->userdata('role') == 2){
+			redirect('admin');
+		}else if ($this->session->userdata('role') == 3){
 			redirect('auth');
 		}
+
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('nip', 'NIP', 'required');
 		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
@@ -112,7 +119,7 @@ class Auth extends CI_Controller
 					'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
 					'image' => 'default.jpg',
 					'password' => htmlspecialchars($this->input->post('password1', true)),
-					'role' => 1
+					'role' => 2
 				];
 	
 				$this->crud->input_data($data,'user');
@@ -127,8 +134,11 @@ class Auth extends CI_Controller
 		if ($this->session->userdata('role') == 1) {
 			redirect('admin');
 		}else if ($this->session->userdata('role') == 2){
+			redirect('admin');
+		}else if ($this->session->userdata('role') == 3){
 			redirect('auth');
 		}
+
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
 			'matches' => 'Password dont match!',
@@ -153,7 +163,7 @@ class Auth extends CI_Controller
 					'username' => htmlspecialchars($this->input->post('username', true)),
 					'image' => 'default.jpg',
 					'password' => htmlspecialchars($this->input->post('password1', true)),
-					'role' => 2
+					'role' => 3
 				];
 	
 				$this->crud->input_data($data,'user');
@@ -190,6 +200,8 @@ class Auth extends CI_Controller
 		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['user'] = $user;
 
+		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
 		$this->load->view('auth/header', $data);
         $this->load->view('auth/bidang', $data);
 		$this->load->view('auth/footer', $data);
@@ -201,6 +213,8 @@ class Auth extends CI_Controller
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['user'] = $user;
+
+		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
 		$this->load->view('auth/header', $data);
         $this->load->view('auth/kegiatan', $data);
@@ -218,4 +232,28 @@ class Auth extends CI_Controller
         $this->load->view('auth/lokasi', $data);
 		$this->load->view('auth/footer', $data);
     }
+
+	public function cetakbidang()
+    {
+		$data['title'] = 'Data Bidang Tanah';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] = $user;
+
+		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
+		$this->load->view('auth/cetakbidang', $data);
+	}
+
+	public function cetakkegiatan()
+    {
+		$data['title'] = 'Data Kegiatan';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] = $user;
+
+		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
+
+		$this->load->view('auth/cetakkegiatan', $data);
+	}
 }

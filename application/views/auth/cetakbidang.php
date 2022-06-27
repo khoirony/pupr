@@ -1,11 +1,24 @@
-	<div class="container text-center pt-5">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Cetak Bidang Tanah</title>
+  </head>
+  <body>
+  <div class="container-fluid text-center pt-5">
 		<h3 class="fw-bold">
 			PENGADAAN TANAH BWS KALIMANTAN <br>
 			III <br>
 			PUPR SNVT PJPA <br>
-		</h3><br>
+		</h3><br><br>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<h3>
 			Data Bidang Tanah
 		</h3>
@@ -45,5 +58,14 @@
 				?>
 			</tbody>
 		</table>
-		<a href="<?= base_url('auth/cetakbidang'); ?>" class="btn btn-sm btn-primary rounded-pill px-4">Cetak</a> <a href="<?= base_url('auth/excelbidang'); ?>" class="btn btn-sm btn-primary rounded-pill px-4">Excel</a>
 	</div>
+
+
+    <script>
+        window.print();
+    </script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>

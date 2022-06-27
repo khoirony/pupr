@@ -17,7 +17,11 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahalha'); ?>">Tambah Alas Hak</a>
+				<?php if($user['role'] != 1){?>
+					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahalha'); ?>">Tambah Alas Hak</a>
+				<?php
+					}
+				?>
             </div>
         </div>
     </div>
@@ -28,7 +32,11 @@
 					<th scope="col">Nomor Bidang Tanah</th>
 					<th scope="col">Jenis Alas Hak</th>
 					<th scope="col">Luas Alas Hak</th>
+					<?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
+					<?php
+						}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,10 +49,14 @@
 					<td><?= $alha['id_bidang_tanah']; ?></td>
 					<td><?= $alha['jenis_alas_hak']; ?></td>
 					<td><?= $alha['luas_alas_hak']; ?></td>
+					<?php if($user['role'] != 1){?>
 					<td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editalha/' . $alha['id_alas_hak']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapusalha/' . $alha['id_alas_hak']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
+					<?php
+						}
+					?>
 				</tr>
 				<?php
 				}

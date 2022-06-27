@@ -30,12 +30,6 @@
                 </div>
 
                 <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Nama Penggarap</p>
-                    <input type="text" class="form-control form-control-user" id="nama_penggarap" name="nama_penggarap">
-                    <?= form_error('nama_penggarap', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
-                <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nama yang Hadir</p>
                     <input type="text" class="form-control form-control-user" id="nama_hadir" name="nama_hadir">
                     <?= form_error('nama_hadir', '<small class="text-danger pl-3">', '</small>'); ?>

@@ -69,6 +69,7 @@
                 </div>
             </li>
 
+            <?php if($user['role'] == 1){?>
         	<div class="sidebar-heading mt-3">
         		Administrasi
         	</div>
@@ -82,6 +83,9 @@
 				<i class="fas fa-fw fa-map-marker-alt"></i>
         			<span>Tambah User</a>
         	</li>
+            <?php
+                }
+            ?>
 			<hr class="sidebar-divider mt-3">
 
         	<!-- Sidebar Toggler (Sidebar) -->

@@ -36,7 +36,7 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nilai Tanah</p>
-                    <input type="text" class="form-control form-control-user" id="nilai_tanah" name="nilai_tanah">
+                    <input type="number" class="form-control form-control-user" id="nilai_tanah" name="nilai_tanah">
                     <?= form_error('nilai_tanah', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
@@ -48,20 +48,14 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nilai Benda Lain</p>
-                    <input type="text" class="form-control form-control-user" id="nilai_benda_lain" name="nilai_benda_lain">
+                    <input type="number" class="form-control form-control-user" id="nilai_benda_lain" name="nilai_benda_lain">
                     <?= form_error('nilai_benda_lain', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nilai Kerugian</p>
-                    <input type="text" class="form-control form-control-user" id="nilai_kerugian" name="nilai_kerugian">
+                    <input type="number" class="form-control form-control-user" id="nilai_kerugian" name="nilai_kerugian">
                     <?= form_error('nilai_kerugian', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
-                <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Total Nilai Ganti Rugi</p>
-                    <input type="text" class="form-control form-control-user" id="total_nilai_ganti_rugi" name="total_nilai_ganti_rugi">
-                    <?= form_error('total_nilai_ganti_rugi', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="text-center">

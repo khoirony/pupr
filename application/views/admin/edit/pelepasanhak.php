@@ -25,21 +25,6 @@
                 </div>
 
                 <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Nama Penggarap</p>
-                    <select class="custom-select rounded-pill px-3" id="nama_penggarap" name="nama_penggarap">
-                        <option value="<?= $pelhak['nama_penggarap'];?>"><?= $pelhak['nama_penggarap'];?></option>
-                        <?php
-                        foreach ($pelaksana as $pel) {
-                        ?>
-                        <option value="<?= $pel['nama_pelaksana']; ?>"><?= $pel['nama_pelaksana']; ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                    <?= form_error('nama_penggarap', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
-                <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Kwitansi</p>
                     <input type="text" class="form-control form-control-user" id="nomor_kwitansi" name="nomor_kwitansi" value="<?= $pelhak['nomor_kwitansi'];?>">
                     <?= form_error('nomor_kwitansi', '<small class="text-danger pl-3">', '</small>'); ?>
