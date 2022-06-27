@@ -17,7 +17,11 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpengumuman'); ?>">Tambah Pengumuman</a>
+				<?php if($user['role'] != 1){?>
+					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpengumuman'); ?>">Tambah Pengumuman</a>
+				<?php
+					}
+				?>
             </div>
         </div>
     </div>
@@ -31,7 +35,11 @@
 					<th scope="col">Tanggal Mulai</th>
 					<th scope="col">Tanggal Selesai</th>
 					<th scope="col">Nomor Berita Acara</th>
+                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
+					<?php
+						}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,10 +55,14 @@
 					<td><?= $p['tanggal_pengumuman']; ?></td>
 					<td><?= $p['selesai_pengumuman']; ?></td>
 					<td><?= $p['id_berita']; ?></td>
+					<?php if($user['role'] != 1){?>
 					<td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editpengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
+					<?php
+						}
+					?>
 				</tr>
 				<?php
 				}

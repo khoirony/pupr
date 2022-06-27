@@ -17,7 +17,11 @@
                 </div>
             </div>
             <div class="col text-right">
-                <a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpentan'); ?>">Tambah Penilaian Tanah</a>
+				<?php if($user['role'] != 1){?>
+					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpentan'); ?>">Tambah Penilaian Tanah</a>
+				<?php
+					}
+				?>
             </div>
         </div>
     </div>
@@ -33,7 +37,11 @@
                     <th scope="col">Nilai Benda Lain</th>
 					<th scope="col">Nilai Kerugian</th>
 					<th scope="col">Total Nilai Ganti Rugi</th>
+                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
+					<?php
+						}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,10 +59,14 @@
 					<td><?= $pentan['nilai_benda_lain']; ?></td>
 					<td><?= $pentan['nilai_kerugian']; ?></td>
                     <td><?= $pentan['total_nilai_ganti_rugi']; ?></td>
+					<?php if($user['role'] != 1){?>
                     <td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editpentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
+					<?php
+						}
+					?>
 				</tr>
 				<?php
 				}
