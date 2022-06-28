@@ -27,7 +27,7 @@
     </div>
     <table class="table table-striped table-bordered table-hover">
 			<thead>
-				<tr class="bg-white">
+				<tr class="bg-white text-center">
 					<th scope="col">No</th>
 					<th scope="col">Nomor Bidang Tanah</th>
 					<th scope="col">Nama Penggarap</th>
@@ -38,11 +38,7 @@
                     <th scope="col">Tgl Kwitansi</th>
 					<th scope="col">Nama Bank</th>
 					<th scope="col">Tgl Pembayaran</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,14 +57,15 @@
 					<td><?= $peha['tanggal_kwitansi']; ?></td>
                     <td><?= $peha['nama_bank']; ?></td>
 					<td><?= $peha['tanggal_pembayaran']; ?></td>
-					<?php if($user['role'] != 1){?>
-                    <td class="text-center" style="width:100px;">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+						<a href="<?= base_url('Admin/cetakpelhak/' . $peha['id_pelepasan']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editpelhak/' . $peha['id_pelepasan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspelhak/' . $peha['id_pelepasan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

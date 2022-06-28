@@ -41,7 +41,6 @@ class Admin extends CI_Controller
 			redirect('auth');
 		}
 
-        $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required');
         $data['title'] = 'Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -54,6 +53,22 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/penetapanlokasi', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanpenlok()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+        $data['title'] = 'Penetapan Lokasi';
+		$data['active'] = 'perencanaan';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+
+		$this->load->view('admin/laporan/penlok', $data);
     }
 
     public function caripenlok()
@@ -326,6 +341,22 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/pelaksana', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanpelaksana()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+        $data['title'] = 'Pelaksana';
+		$data['active'] = 'perencanaan';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+
+		$this->load->view('admin/laporan/pelaksana', $data);
     }
 
     public function caripelaksana()
@@ -1964,15 +1995,31 @@ class Admin extends CI_Controller
 		if ($this->session->userdata('role') == 3) {
 			redirect('auth');
 		}
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
         $data['title'] = 'Tambah User';
 		$data['active'] = 'tambah';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-		$this->load->view('admin/templates/header', $data);
-		$this->load->view('admin/templates/sidebar', $data);
-		$this->load->view('admin/templates/topbar', $data);
-        $this->load->view('admin/tambahuser', $data);
-		$this->load->view('admin/templates/footer', $data);
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('admin/tambahuser', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $data = [
+                'username' => htmlspecialchars($this->input->post('username', true)),
+				'password' => htmlspecialchars($this->input->post('password', true)),
+                'role' => 1
+            ];
+
+            $this->db->insert('user', $data);
+            
+            $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Akun Admin Berhasil dibuat</div>');
+            redirect('Admin/tambahuser');
+        }
     }
 }

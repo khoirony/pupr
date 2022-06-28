@@ -27,7 +27,7 @@
     </div>
     <table class="table table-striped table-bordered table-hover">
 			<thead>
-				<tr class="bg-white">
+				<tr class="bg-white text-center">
 					<th scope="col">No</th>
 					<th scope="col">Nomor Bidang tanah</th>
 					<th scope="col">Penilai Tanah</th>
@@ -37,11 +37,7 @@
                     <th scope="col">Nilai Benda Lain</th>
 					<th scope="col">Nilai Kerugian</th>
 					<th scope="col">Total Nilai Ganti Rugi</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,14 +55,15 @@
 					<td><?= $pentan['nilai_benda_lain']; ?></td>
 					<td><?= $pentan['nilai_kerugian']; ?></td>
                     <td><?= $pentan['total_nilai_ganti_rugi']; ?></td>
-					<?php if($user['role'] != 1){?>
-                    <td class="text-center" style="width:100px;">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+						<a href="<?= base_url('Admin/cetakpentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editpentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

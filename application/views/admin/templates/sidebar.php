@@ -4,7 +4,7 @@
         	<!-- Sidebar - Brand -->
         	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-        		<div class="sidebar-brand-text mx-3">PENGADAAN TANAH PUPR</div>
+        		<img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="w-25"><span class="sidebar-brand-text">PENGADAAN TANAH PUPR</span>
         	</a>
 
         	<!-- Divider -->

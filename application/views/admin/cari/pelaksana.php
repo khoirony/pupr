@@ -27,17 +27,13 @@
     </div>
     <table class="table table-striped table-bordered table-hover">
 			<thead>
-				<tr class="bg-white">
+				<tr class="bg-white text-center">
 					<th scope="col">No</th>
 					<th scope="col">NIP/NRP</th>
 					<th scope="col">Nama</th>
 					<th scope="col">Satgas</th>
 					<th scope="col">Kegiatan</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,14 +47,15 @@
 					<td><?= $pel['nama_pelaksana']; ?></td>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
-					<?php if($user['role'] != 1){?>
-					<td class="text-center" style="width:100px;">
-                        <a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="<?= base_url('Admin/hapuspelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+						<a href="<?= base_url('Admin/cetakpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						<?php if($user['role'] != 1){?>
+                        	<a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        	<a href="<?= base_url('Admin/hapuspelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

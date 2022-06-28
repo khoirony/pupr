@@ -27,7 +27,7 @@
     </div>
     <table class="table table-striped table-bordered table-hover">
 			<thead>
-				<tr class="bg-white">
+				<tr class="bg-white text-center">
 					<th scope="col">No</th>
 					<th scope="col">Nomor Bidang Tanah</th>
 					<th scope="col">Nomor Penlok</th>
@@ -37,11 +37,7 @@
 					<th scope="col">Pelepasan Bidang</th>
                     <th scope="col">Tipe Aset</th>
 					<th scope="col">Perkiraan Dampak</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,14 +55,15 @@
 					<td><?= $bidtan['pelepasan_bidang']; ?></td>
 					<td><?= $bidtan['tipe_aset']; ?></td>
                     <td><?= $bidtan['perkiraan_dampak']; ?></td>
-					<?php if($user['role'] != 1){?>
-					<td class="text-center" style="width:100px;">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+						<a href="<?= base_url('Admin/cetakbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapusbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

@@ -17,6 +17,7 @@
                 </div>
             </div>
             <div class="col text-right">
+				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporanpenhas'); ?>">Laporan Penhas</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpenhas'); ?>">Tambah Penyerahan Hasil</a>
 				<?php
@@ -27,7 +28,7 @@
     </div>
     <table class="table table-striped table-bordered table-hover">
 			<thead>
-				<tr class="bg-white">
+				<tr class="bg-white text-center">
 					<th scope="col">No</th>
 					<th scope="col">Nomor Bidang Tanah</th>
 					<th scope="col">Nama Penggarap</th>
@@ -35,11 +36,7 @@
 					<th scope="col">Nomor Kwitansi</th>
 					<th scope="col">Tgl Kwitansi</th>
 					<th scope="col">Tgl Pembayaran</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,14 +52,15 @@
 					<td><?= $peha['id_pelepasan']; ?></td>
 					<td><?= $peha['tgl_kwitansi']; ?></td>
 					<td><?= $peha['tgl_pembayaran']; ?></td>
-					<?php if($user['role'] != 1){?>
-                    <td class="text-center" style="width:100px;">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+						<a href="<?= base_url('Admin/cetakpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

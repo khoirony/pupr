@@ -2,80 +2,38 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> <?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Tambah User</h1>
+    <br>
 
-    <table class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr class="bg-white">
-					<th scope="col">No</th>
-					<th scope="col">Nomor Penlok</th>
-					<th scope="col">Kategori Penggunaan</th>
-					<th scope="col">Rencana Pembangunan</th>
-					<th scope="col">Sumber Anggaran</th>
-					<th scope="col">Nilai Anggaran</th>
-					<th scope="col">Tanggal Permohonan</th>
-                    <th scope="col">Nama Pemohon</th>
-                    <th scope="col">Aksi</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-                    <td></td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-                    <td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-                    <td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-                    <td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td></td>
-                    <td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+    <div class="row">
+
+        <div class="col-md-6 text-center">
+            <?= $this->session->flashdata('msg');
+                                if (isset($_SESSION['msg'])) {
+                                    unset($_SESSION['msg']);
+                                } ?>
+            <form class="user" method="POST" action="">
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Username</p>
+                    <input type="text" class="form-control form-control-user" id="username" name="username">
+                    <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Password</p>
+                    <input type="text" class="form-control form-control-user" id="password" name="password">
+                    <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-user px-5 mt-3">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+            <br>
+        </div>
+
+    </div>
 
 </div>
-<!-- /.container-fluid -->

@@ -17,6 +17,7 @@
                 </div>
             </div>
             <div class="col text-right">
+				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporanpenlok'); ?>">Laporan Penlok</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpenlok'); ?>">Tambah Penlok</a>
 				<?php
