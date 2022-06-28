@@ -61,11 +61,6 @@ class Admin extends CI_Controller
 			redirect('auth');
 		}
 
-        $data['title'] = 'Penetapan Lokasi';
-		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
-		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-
 		$data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
 
 		$this->load->view('admin/laporan/penlok', $data);
@@ -349,11 +344,6 @@ class Admin extends CI_Controller
 			redirect('auth');
 		}
 
-        $data['title'] = 'Pelaksana';
-		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
-		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-
 		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
 
 		$this->load->view('admin/laporan/pelaksana', $data);
@@ -484,6 +474,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/kegiatan', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporankegiatan()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
+
+		$this->load->view('admin/laporan/kegiatan', $data);
     }
 
     public function carikegiatan()
@@ -625,6 +626,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/bidangtanah', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanbidtan()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
+		$this->load->view('admin/laporan/bidangtanah', $data);
     }
 
     public function caribidtan()
@@ -895,6 +907,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function laporanpihber()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pihak_berhak'] = $this->db->get('pihak_berhak')->result_array();
+
+		$this->load->view('admin/laporan/pihakberhak', $data);
+    }
+
     public function caripihber()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1029,6 +1052,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/pengumuman', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanpengumuman()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
+
+		$this->load->view('admin/laporan/pengumuman', $data);
     }
 
     public function caripengumuman()
@@ -1292,6 +1326,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function laporanpentan()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['penilaian_tanah'] = $this->db->get('penilaian_tanah')->result_array();
+
+		$this->load->view('admin/laporan/penilaiantanah', $data);
+    }
+
     public function caripentan()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1436,6 +1481,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function laporanhamus()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['hasil_musyawarah'] = $this->db->get('hasil_musyawarah')->result_array();
+
+		$this->load->view('admin/laporan/hasilmusyawarah', $data);
+    }
+
     public function carihamus()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1570,6 +1626,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/pelepasanhak', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanpelhak()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
+
+		$this->load->view('admin/laporan/pelepasanhak', $data);
     }
 
     public function caripelhak()
@@ -1726,6 +1793,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/penyerahanhasil', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanpenhas()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
+
+		$this->load->view('admin/laporan/penyerahanhasil', $data);
     }
 
     public function caripenhas()
