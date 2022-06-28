@@ -1697,6 +1697,28 @@ class Admin extends CI_Controller
 		$this->load->view('admin/templates/footer', $data);
     }
 
+    public function caripenhas()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+        $data['title'] = 'Penyerahan Hasil';
+		$data['active'] = 'hasil';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM penyerahan_hasil where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/penyerahanhasil', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
     public function tambahpenhas()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1810,13 +1832,129 @@ class Admin extends CI_Controller
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-		$data['pegawai'] = $this->db->get('pegawai')->result_array();
+		$data['pegawai'] = $this->db->get_where('user', ['role' => 2])->result_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
 		$this->load->view('admin/templates/topbar', $data);
         $this->load->view('admin/pegawai', $data);
 		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function caripegawai()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+        $data['title'] = 'Pegawai';
+		$data['active'] = 'pegawai';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM user where nip like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/pegawai', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function tambahpegawai()
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+        $this->form_validation->set_rules('nip', 'NIP', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama Pegawai', 'required');
+        $this->form_validation->set_rules('pangkat', 'Pangkat', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        $data['title'] = 'Tambah Pegawai';
+		$data['active'] = 'pegawai';
+        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('admin/tambah/pegawai', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $data = [
+                'nip' => htmlspecialchars($this->input->post('nip', true)),
+                'nama' => htmlspecialchars($this->input->post('nama', true)),
+				'pangkat' => htmlspecialchars($this->input->post('pangkat', true)),
+                'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                'username' => htmlspecialchars($this->input->post('username', true)),
+				'password' => htmlspecialchars($this->input->post('password', true)),
+                'role' => 2
+            ];
+
+            $this->db->insert('user', $data);
+            
+            redirect('Admin/pegawai');
+        }
+    }
+
+    public function editpegawai($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+        $this->form_validation->set_rules('nip', 'NIP', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama Pegawai', 'required');
+        $this->form_validation->set_rules('pangkat', 'Pangkat', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        $data['title'] = 'Edit Pegawai';
+		$data['active'] = 'pegawai';
+        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['pegawai'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('admin/edit/pegawai', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $data = [
+                'nip' => htmlspecialchars($this->input->post('nip', true)),
+                'nama' => htmlspecialchars($this->input->post('nama', true)),
+				'pangkat' => htmlspecialchars($this->input->post('pangkat', true)),
+                'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                'username' => htmlspecialchars($this->input->post('username', true)),
+				'password' => htmlspecialchars($this->input->post('password', true)),
+                'role' => 2
+            ];
+
+            $this->db->set($data);
+            $this->db->where('id_user', $id);
+            $this->db->update('user');
+            
+            redirect('Admin/pegawai');
+        }
+    }
+
+    
+
+    public function hapuspegawai($id)
+    {
+        $where = array('id_user' => $id);
+        $this->db->where($where);
+        $this->db->delete('user');
+        redirect('Admin/pegawai');
     }
 
     // ###### MENU TAMBAH USER ######
