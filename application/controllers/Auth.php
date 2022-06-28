@@ -245,6 +245,18 @@ class Auth extends CI_Controller
 		$this->load->view('auth/cetakbidang', $data);
 	}
 
+	public function excelbidang()
+    {
+		$data['title'] = 'Data Bidang Tanah';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] = $user;
+
+		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+
+		$this->load->view('auth/excelbidang', $data);
+	}
+
 	public function cetakkegiatan()
     {
 		$data['title'] = 'Data Kegiatan';
@@ -255,5 +267,17 @@ class Auth extends CI_Controller
 		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
 		$this->load->view('auth/cetakkegiatan', $data);
+	}
+
+	public function excelkegiatan()
+    {
+		$data['title'] = 'Data Kegiatan';
+		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
+		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] = $user;
+
+		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
+
+		$this->load->view('auth/excelkegiatan', $data);
 	}
 }

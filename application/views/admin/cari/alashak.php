@@ -9,7 +9,7 @@
             <div class="col ps-3">
                 <div class="border border-primary rounded-pill bg-white p-1" style="width: 19em;">
                     <form class="d-inline-flex ms-3" method="POST" action="<?= base_url('Admin/carialha'); ?>">
-                        <input type="text" class="border-0" id="cari" name="cari" placeholder="Masukkan nama..">
+                        <input type="text" class="border-0" id="cari" name="cari" placeholder="Masukkan nomor bidtan..">
                         <button type="submit" class="btn btn-primary rounded-pill ps-3 pe-3 ms-4">
                             Cari
                         </button>
