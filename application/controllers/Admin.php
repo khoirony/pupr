@@ -66,6 +66,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/laporan/penlok', $data);
     }
 
+    public function cetakpenlok($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['penlok'] = $this->db->get_where('penetapan_lokasi', ['id_penlok' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpenlok', $data);
+    }
+
     public function caripenlok()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -349,6 +360,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/laporan/pelaksana', $data);
     }
 
+    public function cetakpelaksana($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pelaksana'] = $this->db->get_where('pelaksana', ['id_pelaksana' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpelaksana', $data);
+    }
+
     public function caripelaksana()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -485,6 +507,17 @@ class Admin extends CI_Controller
 		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
 		$this->load->view('admin/laporan/kegiatan', $data);
+    }
+
+    public function cetakkegiatan($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['kegiatan'] = $this->db->get_where('kegiatan', ['id_kegiatan' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakkegiatan', $data);
     }
 
     public function carikegiatan()
@@ -637,6 +670,17 @@ class Admin extends CI_Controller
 		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
 
 		$this->load->view('admin/laporan/bidangtanah', $data);
+    }
+
+    public function cetakbidtan($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['bidtan'] = $this->db->get_where('bidang_tanah', ['id_bidang_tanah' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakbidtan', $data);
     }
 
     public function caribidtan()
@@ -918,6 +962,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/laporan/pihakberhak', $data);
     }
 
+    public function cetakpihber($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pihber'] = $this->db->get_where('pihak_berhak', ['id_pihak' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpihber', $data);
+    }
+
     public function caripihber()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1063,6 +1118,17 @@ class Admin extends CI_Controller
 		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
 
 		$this->load->view('admin/laporan/pengumuman', $data);
+    }
+
+    public function cetakpengumuman($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pengumuman'] = $this->db->get_where('pengumuman', ['id_pengumuman' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpengumuman', $data);
     }
 
     public function caripengumuman()
@@ -1337,6 +1403,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/laporan/penilaiantanah', $data);
     }
 
+    public function cetakpentan($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pentan'] = $this->db->get_where('penilaian_tanah', ['id_penilaian' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpentan', $data);
+    }
+
     public function caripentan()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1492,6 +1569,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/laporan/hasilmusyawarah', $data);
     }
 
+    public function cetakhamus($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['hamus'] = $this->db->get_where('hasil_musyawarah', ['id_musyawarah' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakhamus', $data);
+    }
+
     public function carihamus()
     {
 		if ($this->session->userdata('role') == 3) {
@@ -1637,6 +1725,17 @@ class Admin extends CI_Controller
 		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
 
 		$this->load->view('admin/laporan/pelepasanhak', $data);
+    }
+
+    public function cetakpelhak($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['pelhak'] = $this->db->get_where('pelepasan_hak', ['id_pelepasan' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpelhak', $data);
     }
 
     public function caripelhak()
@@ -1804,6 +1903,17 @@ class Admin extends CI_Controller
 		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
 
 		$this->load->view('admin/laporan/penyerahanhasil', $data);
+    }
+
+    public function cetakpenhas($id)
+    {
+		if ($this->session->userdata('role') == 3) {
+			redirect('auth');
+		}
+
+		$data['penhas'] = $this->db->get_where('penyerahan_hasil', ['id_penyerahan' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakpenhas', $data);
     }
 
     public function caripenhas()
