@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-10 text-center">
-            <form class="user" method="POST" action="">
+            <form class="user" method="POST" action="" enctype="multipart/form-data">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
                     <select class="custom-select rounded-pill px-3" id="id_bidang_tanah" name="id_bidang_tanah">
@@ -64,6 +64,11 @@
                     </select>
                     <?= form_error('id_lokasi', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
+
+                <div class="form-group text-start">
+					<label class="form-label ml-3">Upload Foto</label>
+					<input type="file" id="berkas" name="berkas" class="form-control rounded-pill">
+				</div>
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-user px-5 mt-3">

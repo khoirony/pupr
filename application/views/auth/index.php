@@ -1,7 +1,7 @@
 <br><br>
 	<div class="container text-center pt-5">
 		<div class="row justify-content-center">
-			<h1 class="border col-4 py-4">LOGO</h1>
+			<img src="<?= base_url('assets/img/logo.png');?>" alt="logo" class="mb-3" style="width:10%;">
 		</div>
 		<h3 class="fw-bold">
 			PENGADAAN TANAH BWS KALIMANTAN <br>

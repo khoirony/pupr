@@ -12,9 +12,14 @@ class Admin extends CI_Controller
 
 	public function index()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+
         $data['title'] = 'Dashboard';
 		$data['active'] = 'dashboard';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -37,9 +42,11 @@ class Admin extends CI_Controller
 
 	public function penetapanlokasi()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
         $data['title'] = 'Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
@@ -57,9 +64,11 @@ class Admin extends CI_Controller
 
     public function laporanpenlok()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
 
@@ -68,9 +77,11 @@ class Admin extends CI_Controller
 
     public function cetakpenlok($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['penlok'] = $this->db->get_where('penetapan_lokasi', ['id_penlok' => $id])->row_array();
 
@@ -79,9 +90,11 @@ class Admin extends CI_Controller
 
     public function caripenlok()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required');
         $data['title'] = 'Penetapan Lokasi';
@@ -103,9 +116,11 @@ class Admin extends CI_Controller
 
 	public function tambahpenlok()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('kategori_pembangunan', 'Kategori Pembangunan', 'required');
         $this->form_validation->set_rules('rencana_pembangunan', 'Rencana Pembangunan', 'required');
@@ -144,9 +159,11 @@ class Admin extends CI_Controller
 
 	public function editpenlok($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('kategori_pembangunan', 'Kategori Pembangunan', 'required');
         $this->form_validation->set_rules('rencana_pembangunan', 'Rencana Pembangunan', 'required');
@@ -199,9 +216,11 @@ class Admin extends CI_Controller
 
 	public function lokasi()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Lokasi';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -218,9 +237,11 @@ class Admin extends CI_Controller
 
     public function carilokasi()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Lokasi';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -240,9 +261,11 @@ class Admin extends CI_Controller
 
 	public function tambahlokasi()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('kabupaten_kota', 'Kabupaten/Kota', 'required');
         $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
@@ -279,9 +302,11 @@ class Admin extends CI_Controller
 
 	public function editlokasi($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('kabupaten_kota', 'Kabupaten/Kota', 'required');
         $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
@@ -332,9 +357,11 @@ class Admin extends CI_Controller
 
 	public function pelaksana()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pelaksana';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -351,9 +378,11 @@ class Admin extends CI_Controller
 
     public function laporanpelaksana()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
 
@@ -362,9 +391,11 @@ class Admin extends CI_Controller
 
     public function cetakpelaksana($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pelaksana'] = $this->db->get_where('pelaksana', ['id_pelaksana' => $id])->row_array();
 
@@ -373,9 +404,11 @@ class Admin extends CI_Controller
 
     public function caripelaksana()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pelaksana';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -395,9 +428,11 @@ class Admin extends CI_Controller
 
 	public function tambahpelaksana()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nip', 'NIP/NRP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
         $this->form_validation->set_rules('satgas', 'Satgas', 'required');
@@ -432,9 +467,11 @@ class Admin extends CI_Controller
 
 	public function editpelaksana($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nip', 'NIP/NRP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
         $this->form_validation->set_rules('satgas', 'Satgas', 'required');
@@ -481,9 +518,11 @@ class Admin extends CI_Controller
 
 	public function kegiatan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Kegiatan';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -500,9 +539,11 @@ class Admin extends CI_Controller
 
     public function laporankegiatan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
@@ -511,9 +552,11 @@ class Admin extends CI_Controller
 
     public function cetakkegiatan($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['kegiatan'] = $this->db->get_where('kegiatan', ['id_kegiatan' => $id])->row_array();
 
@@ -522,9 +565,11 @@ class Admin extends CI_Controller
 
     public function carikegiatan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Kegiatan';
 		$data['active'] = 'perencanaan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -544,9 +589,11 @@ class Admin extends CI_Controller
 
 	public function tambahkegiatan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('nomor_kegiatan', 'Nomor Kegiatan', 'required');
         $this->form_validation->set_rules('rencana_penggunaan', 'Rencana Pembangunan', 'required');
@@ -587,9 +634,11 @@ class Admin extends CI_Controller
 
 	public function editkegiatan($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('nomor_kegiatan', 'Nomor Kegiatan', 'required');
         $this->form_validation->set_rules('rencana_penggunaan', 'Rencana Pembangunan', 'required');
@@ -644,9 +693,11 @@ class Admin extends CI_Controller
 
 	public function bidangtanah()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Bidang Tanah';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -663,9 +714,11 @@ class Admin extends CI_Controller
 
     public function laporanbidtan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
 
@@ -674,9 +727,11 @@ class Admin extends CI_Controller
 
     public function cetakbidtan($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['bidtan'] = $this->db->get_where('bidang_tanah', ['id_bidang_tanah' => $id])->row_array();
 
@@ -685,9 +740,11 @@ class Admin extends CI_Controller
 
     public function caribidtan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Bidang Tanah';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -707,9 +764,11 @@ class Admin extends CI_Controller
 
     public function tambahbidtan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required');
         $this->form_validation->set_rules('nama_penggarap', 'Pemilik/Penggarap', 'required');
@@ -733,18 +792,33 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/bidangtanah', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
+
             $data = [
-				'id_penlok' => htmlspecialchars($this->input->post('nomor_penlok', true)),
+                'id_penlok' => htmlspecialchars($this->input->post('nomor_penlok', true)),
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
-				'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
+                'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
                 'tipe_aset' => htmlspecialchars($this->input->post('tipe_aset', true)),
                 'luas' => htmlspecialchars($this->input->post('luas', true)),
-				'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
-				'pelepasan_bidang' => htmlspecialchars($this->input->post('pelepasan_bidang', true)),
-				'perkiraan_dampak' => htmlspecialchars($this->input->post('perkiraan_dampak', true)),
+                'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
+                'pelepasan_bidang' => htmlspecialchars($this->input->post('pelepasan_bidang', true)),
+                'perkiraan_dampak' => htmlspecialchars($this->input->post('perkiraan_dampak', true)),
+                'koordinat' => htmlspecialchars($this->input->post('koordinat', true)),
+                'gambar' => $uploaded_data['file_name']
             ];
-
             $this->db->insert('bidang_tanah', $data);
+
+            
             
             redirect('Admin/bidangtanah');
         }
@@ -752,9 +826,11 @@ class Admin extends CI_Controller
 
     public function editbidtan($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required|trim');
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required');
         $this->form_validation->set_rules('nama_penggarap', 'Pemilik/Penggarap', 'required');
@@ -810,9 +886,11 @@ class Admin extends CI_Controller
     
 	public function alashak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Alas Hak';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -829,9 +907,11 @@ class Admin extends CI_Controller
 
     public function carialha()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Alas Hak';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -851,9 +931,11 @@ class Admin extends CI_Controller
 
     public function tambahalha()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('jenis_alas_hak', 'Jenis Alas Hak', 'required');
         $this->form_validation->set_rules('luas_alas_hak', 'Luas Alas Hak', 'required');
@@ -886,9 +968,11 @@ class Admin extends CI_Controller
 
     public function editalha($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('jenis_alas_hak', 'Jenis Alas Hak', 'required');
         $this->form_validation->set_rules('luas_alas_hak', 'Luas Alas Hak', 'required');
@@ -934,9 +1018,11 @@ class Admin extends CI_Controller
 
 	public function pihakberhak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pihak Yang Berhak';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -953,9 +1039,11 @@ class Admin extends CI_Controller
 
     public function laporanpihber()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pihak_berhak'] = $this->db->get('pihak_berhak')->result_array();
 
@@ -964,9 +1052,11 @@ class Admin extends CI_Controller
 
     public function cetakpihber($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pihber'] = $this->db->get_where('pihak_berhak', ['id_pihak' => $id])->row_array();
 
@@ -975,9 +1065,11 @@ class Admin extends CI_Controller
 
     public function caripihber()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pihak Yang Berhak';
 		$data['active'] = 'persiapan';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -997,9 +1089,11 @@ class Admin extends CI_Controller
 
     public function tambahpihber()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nik', 'NIK', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -1038,9 +1132,11 @@ class Admin extends CI_Controller
 
     public function editpihber($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nik', 'NIK', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -1092,9 +1188,11 @@ class Admin extends CI_Controller
 
 	public function pengumuman()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pengumuman';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1111,9 +1209,11 @@ class Admin extends CI_Controller
 
     public function laporanpengumuman()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
 
@@ -1122,9 +1222,11 @@ class Admin extends CI_Controller
 
     public function cetakpengumuman($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pengumuman'] = $this->db->get_where('pengumuman', ['id_pengumuman' => $id])->row_array();
 
@@ -1133,9 +1235,11 @@ class Admin extends CI_Controller
 
     public function caripengumuman()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pengumuman';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1155,9 +1259,11 @@ class Admin extends CI_Controller
 
     public function tambahpengumuman()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_pengumuman', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('id_bidang_tanah', 'NIK', 'required');
         $this->form_validation->set_rules('id_pelaksana', 'Nama', 'required');
@@ -1197,9 +1303,11 @@ class Admin extends CI_Controller
 
     public function editpengumuman($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_pengumuman', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('id_bidang_tanah', 'NIK', 'required');
         $this->form_validation->set_rules('id_pelaksana', 'Nama', 'required');
@@ -1252,9 +1360,11 @@ class Admin extends CI_Controller
 
 	public function beritaacara()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Berita Acara';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1271,9 +1381,11 @@ class Admin extends CI_Controller
 
     public function cariberita()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Berita Acara';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1293,9 +1405,11 @@ class Admin extends CI_Controller
 
     public function tambahberita()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_berita', 'Nomor Berita', 'required|trim');
         $this->form_validation->set_rules('jenis_berita', 'Jenis Berita', 'required');
         $this->form_validation->set_rules('tanggal_berita', 'Tanggal', 'required');
@@ -1328,9 +1442,11 @@ class Admin extends CI_Controller
 
     public function editberita($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nomor_berita', 'Nomor Berita', 'required|trim');
         $this->form_validation->set_rules('jenis_berita', 'Jenis Berita', 'required');
         $this->form_validation->set_rules('tanggal_berita', 'Tanggal', 'required');
@@ -1375,9 +1491,11 @@ class Admin extends CI_Controller
 
 	public function penilaiantanah()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Penilaian Tanah';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1394,9 +1512,11 @@ class Admin extends CI_Controller
 
     public function laporanpentan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['penilaian_tanah'] = $this->db->get('penilaian_tanah')->result_array();
 
@@ -1405,9 +1525,11 @@ class Admin extends CI_Controller
 
     public function cetakpentan($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pentan'] = $this->db->get_where('penilaian_tanah', ['id_penilaian' => $id])->row_array();
 
@@ -1416,9 +1538,11 @@ class Admin extends CI_Controller
 
     public function caripentan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Penilaian Tanah';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1438,9 +1562,11 @@ class Admin extends CI_Controller
 
     public function tambahpentan()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('penilai_tanah', 'Penilai Tanah', 'required');
         $this->form_validation->set_rules('id_pelaksana', 'Satgas', 'required');
@@ -1483,9 +1609,11 @@ class Admin extends CI_Controller
 
     public function editpentan($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('penilai_tanah', 'Penilai Tanah', 'required');
         $this->form_validation->set_rules('id_pelaksana', 'Satgas', 'required');
@@ -1541,9 +1669,11 @@ class Admin extends CI_Controller
 
 	public function hasilmusyawarah()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Hasil Musyawarah';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1560,9 +1690,11 @@ class Admin extends CI_Controller
 
     public function laporanhamus()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['hasil_musyawarah'] = $this->db->get('hasil_musyawarah')->result_array();
 
@@ -1571,9 +1703,11 @@ class Admin extends CI_Controller
 
     public function cetakhamus($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['hamus'] = $this->db->get_where('hasil_musyawarah', ['id_musyawarah' => $id])->row_array();
 
@@ -1582,9 +1716,11 @@ class Admin extends CI_Controller
 
     public function carihamus()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Hasil Musyawarah';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1604,9 +1740,11 @@ class Admin extends CI_Controller
 
     public function tambahhamus()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('id_lokasi', 'Desa/Kelurahan', 'required');
         $this->form_validation->set_rules('nama_hadir', 'Nama yang Hadir', 'required');
@@ -1645,9 +1783,11 @@ class Admin extends CI_Controller
 
     public function edithamus($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('id_lokasi', 'Desa/Kelurahan', 'required');
         $this->form_validation->set_rules('nama_hadir', 'Nama yang Hadir', 'required');
@@ -1699,9 +1839,11 @@ class Admin extends CI_Controller
 
 	public function pelepasanhak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pelepasan Hak';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1718,9 +1860,11 @@ class Admin extends CI_Controller
 
     public function laporanpelhak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
 
@@ -1729,9 +1873,11 @@ class Admin extends CI_Controller
 
     public function cetakpelhak($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['pelhak'] = $this->db->get_where('pelepasan_hak', ['id_pelepasan' => $id])->row_array();
 
@@ -1740,9 +1886,11 @@ class Admin extends CI_Controller
 
     public function caripelhak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pelepasan Hak';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1762,9 +1910,11 @@ class Admin extends CI_Controller
 
     public function tambahpelhak()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
         $this->form_validation->set_rules('tanggal_kwitansi', 'Tanggal Kwitansi', 'required');
@@ -1813,9 +1963,11 @@ class Admin extends CI_Controller
 
     public function editpelhak($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
         $this->form_validation->set_rules('tanggal_kwitansi', 'Tanggal Kwitansi', 'required');
@@ -1877,9 +2029,11 @@ class Admin extends CI_Controller
 
 	public function penyerahanhasil()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Penyerahan Hasil';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1896,9 +2050,11 @@ class Admin extends CI_Controller
 
     public function laporanpenhas()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
 
@@ -1907,9 +2063,11 @@ class Admin extends CI_Controller
 
     public function cetakpenhas($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
 
 		$data['penhas'] = $this->db->get_where('penyerahan_hasil', ['id_penyerahan' => $id])->row_array();
 
@@ -1918,9 +2076,11 @@ class Admin extends CI_Controller
 
     public function caripenhas()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Penyerahan Hasil';
 		$data['active'] = 'hasil';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -1940,9 +2100,11 @@ class Admin extends CI_Controller
 
     public function tambahpenhas()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nama_penggarap', 'Nama Penggarap', 'required');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
@@ -1967,13 +2129,25 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/penyerahanhasil', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
                 'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
 				'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
                 'id_pelepasan' => htmlspecialchars($this->input->post('nomor_kwitansi', true)),
                 'tgl_kwitansi' => $pelhak['tanggal_kwitansi'],
-				'tgl_pembayaran' => $pelhak['tanggal_pembayaran']
+				'tgl_pembayaran' => $pelhak['tanggal_pembayaran'],
+                'gambar' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('penyerahan_hasil', $data);
@@ -1984,9 +2158,11 @@ class Admin extends CI_Controller
 
     public function editpenhas($id)
     {
-        if ($this->session->userdata('role') == 3) {
+        if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nama_penggarap', 'Nama Penggarap', 'required');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
@@ -2043,9 +2219,11 @@ class Admin extends CI_Controller
 
 	public function pegawai()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pegawai';
 		$data['active'] = 'pegawai';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -2062,9 +2240,11 @@ class Admin extends CI_Controller
 
     public function caripegawai()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $data['title'] = 'Pegawai';
 		$data['active'] = 'pegawai';
 		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
@@ -2084,9 +2264,11 @@ class Admin extends CI_Controller
 
     public function tambahpegawai()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nip', 'NIP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Pegawai', 'required');
         $this->form_validation->set_rules('pangkat', 'Pangkat', 'required');
@@ -2124,9 +2306,11 @@ class Admin extends CI_Controller
 
     public function editpegawai($id)
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('nip', 'NIP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Pegawai', 'required');
         $this->form_validation->set_rules('pangkat', 'Pangkat', 'required');
@@ -2180,9 +2364,11 @@ class Admin extends CI_Controller
 
 	public function tambahuser()
     {
-		if ($this->session->userdata('role') == 3) {
+		if($this->session->userdata('role') > 2){
 			redirect('auth');
-		}
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 

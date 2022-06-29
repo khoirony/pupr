@@ -65,6 +65,15 @@
           : <?= $penhas['tgl_pembayaran'];?>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Foto Penggarap
+        </div>
+        <div class="col-8">
+          : 
+        </div>
+      </div>
+      <img src="../../assets/img/<?= $penhas['gambar'];?>" alt="foto" class="img-thumbnail">
     </div><br><br><br>
 
 
