@@ -22,7 +22,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Dashboard';
 		$data['active'] = 'dashboard';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['user'] = $user;
 
@@ -50,10 +49,10 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penetapan_lokasi'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -69,6 +68,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penetapan_lokasi'])->row_array();
 
 		$data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
 
@@ -82,6 +82,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penetapan_lokasi'])->row_array();
 
 		$data['penlok'] = $this->db->get_where('penetapan_lokasi', ['id_penlok' => $id])->row_array();
 
@@ -99,7 +100,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nomor_penlok', 'Nomor Penlok', 'required');
         $data['title'] = 'Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM penetapan_lokasi where id_penlok like '%" . $this->input->post('cari') . "%'";
@@ -131,7 +131,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         if ($this->form_validation->run() == false) {
@@ -174,7 +173,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penlok'] = $this->db->get_where('penetapan_lokasi', ['id_penlok' => $id])->row_array();
@@ -212,6 +210,54 @@ class Admin extends CI_Controller
         redirect('Admin/penetapanlokasi');
     }
 
+    public function setujupenlok()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penetapan_lokasi');
+        $this->db->update('status');
+        redirect('Admin/penetapanlokasi');
+    }
+
+    public function batalpenlok()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penetapan_lokasi');
+        $this->db->update('status');
+        redirect('Admin/penetapanlokasi');
+    }
+
+    public function setujudetailpenlok($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penlok', $id);
+        $this->db->update('penetapan_lokasi');
+        redirect('Admin/penetapanlokasi');
+    }
+
+    public function bataldetailpenlok($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penlok', $id);
+        $this->db->update('penetapan_lokasi');
+        redirect('Admin/penetapanlokasi');
+    }
+
 	// ###### MENU LOKASI ######
 
 	public function lokasi()
@@ -223,7 +269,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Lokasi';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['lokasi'] = $this->db->get('lokasi')->result_array();
@@ -244,7 +289,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Lokasi';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM lokasi where id_penlok like '%" . $this->input->post('cari') . "%'";
@@ -274,7 +318,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Lokasi';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
@@ -315,7 +358,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Lokasi';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
@@ -364,10 +406,10 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pelaksana';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pelaksana'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -383,6 +425,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penetapan_lokasi'])->row_array();
 
 		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
 
@@ -411,7 +454,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pelaksana';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM pelaksana where nama_pelaksana like '%" . $this->input->post('cari') . "%'";
@@ -440,7 +482,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Pelaksana';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['kegiatan'] = $this->db->get('kegiatan')->result_array();
@@ -479,7 +520,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit pelaksana';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pelaksana'] = $this->db->get_where('pelaksana', ['id_pelaksana' => $id])->row_array();
@@ -514,6 +554,54 @@ class Admin extends CI_Controller
         redirect('Admin/pelaksana');
     }
 
+    public function setujupelaksana()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pelaksana');
+        $this->db->update('status');
+        redirect('Admin/pelaksana');
+    }
+
+    public function batalpelaksana()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pelaksana');
+        $this->db->update('status');
+        redirect('Admin/pelaksana');
+    }
+
+    public function setujudetailpelaksana($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pelaksana', $id);
+        $this->db->update('pelaksana');
+        redirect('Admin/pelaksana');
+    }
+
+    public function bataldetailpelaksana($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pelaksana', $id);
+        $this->db->update('pelaksana');
+        redirect('Admin/pelaksana');
+    }
+
 	// ###### MENU KEGIATAN ######
 
 	public function kegiatan()
@@ -525,10 +613,10 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Kegiatan';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'kegiatan'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -544,6 +632,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'kegiatan'])->row_array();
 
 		$data['kegiatan'] = $this->db->get('kegiatan')->result_array();
 
@@ -572,7 +661,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Kegiatan';
 		$data['active'] = 'perencanaan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		
 		$query = "SELECT * FROM kegiatan where nomor_kegiatan like '%" . $this->input->post('cari') . "%'";
@@ -604,7 +692,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Kegiatan';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
@@ -649,7 +736,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Kegiatan';
 		$data['active'] = 'perencanaan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['kegiatan'] = $this->db->get_where('kegiatan', ['id_kegiatan' => $id])->row_array();
@@ -689,6 +775,54 @@ class Admin extends CI_Controller
         redirect('Admin/kegiatan');
     }
 
+    public function setujukegiatan()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'kegiatan');
+        $this->db->update('status');
+        redirect('Admin/kegiatan');
+    }
+
+    public function batalkegiatan()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'kegiatan');
+        $this->db->update('status');
+        redirect('Admin/kegiatan');
+    }
+
+    public function setujudetailkegiatan($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_kegiatan', $id);
+        $this->db->update('kegiatan');
+        redirect('Admin/kegiatan');
+    }
+
+    public function bataldetailkegiatan($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_kegiatan', $id);
+        $this->db->update('kegiatan');
+        redirect('Admin/kegiatan');
+    }
+
 	// ###### MENU BIDANG TANAH ######
 
 	public function bidangtanah()
@@ -700,7 +834,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Bidang Tanah';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -747,7 +880,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Bidang Tanah';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM bidang_tanah where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -780,7 +912,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Bidang Tanah';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
@@ -842,7 +973,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Bidang Tanah';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['bidtan'] = $this->db->get_where('bidang_tanah', ['id_bidang_tanah' => $id])->row_array();
@@ -893,7 +1023,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Alas Hak';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['alas_hak'] = $this->db->get('alas_hak')->result_array();
@@ -914,7 +1043,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Alas Hak';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM alas_hak where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -942,7 +1070,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Alas Hak';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -979,7 +1106,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Alas Hak';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['alha'] = $this->db->get_where('alas_hak', ['id_alas_hak' => $id])->row_array();
@@ -1025,7 +1151,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pihak Yang Berhak';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pihak_berhak'] = $this->db->get('pihak_berhak')->result_array();
@@ -1072,7 +1197,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pihak Yang Berhak';
 		$data['active'] = 'persiapan';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM pihak_berhak where nik like '%" . $this->input->post('cari') . "%'";
@@ -1103,7 +1227,6 @@ class Admin extends CI_Controller
         
         $data['title'] = 'Tambah Pihak Berhak';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -1146,7 +1269,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Pihak Berhak';
 		$data['active'] = 'persiapan';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pihber'] = $this->db->get_where('pihak_berhak', ['id_pihak' => $id])->row_array();
@@ -1195,7 +1317,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pengumuman';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
@@ -1242,7 +1363,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pengumuman';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM pengumuman where nomor_pengumuman like '%" . $this->input->post('cari') . "%'";
@@ -1273,7 +1393,6 @@ class Admin extends CI_Controller
         
         $data['title'] = 'Tambah Pengumuman';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -1317,7 +1436,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Pengumuman';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pengumuman'] = $this->db->get_where('pengumuman', ['id_pengumuman' => $id])->row_array();
@@ -1367,7 +1485,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Berita Acara';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['berita_acara'] = $this->db->get('berita_acara')->result_array();
@@ -1388,7 +1505,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Berita Acara';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM berita_acara where nomor_berita like '%" . $this->input->post('cari') . "%'";
@@ -1416,7 +1532,6 @@ class Admin extends CI_Controller
         
         $data['title'] = 'Tambah Berita Acara';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['pengumuman'] = $this->db->get('pengumuman')->result_array();
@@ -1453,7 +1568,6 @@ class Admin extends CI_Controller
         
         $data['title'] = 'Edit Berita Acara';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['berac'] = $this->db->get_where('berita_acara', ['id_berita' => $id])->row_array();
@@ -1498,7 +1612,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Penilaian Tanah';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penilaian_tanah'] = $this->db->get('penilaian_tanah')->result_array();
@@ -1545,7 +1658,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Penilaian Tanah';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM penilaian_tanah where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -1577,7 +1689,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Penilaian Tanah';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -1624,7 +1735,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Penilaian Tanah';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pentan'] = $this->db->get_where('penilaian_tanah', ['id_penilaian' => $id])->row_array();
@@ -1676,7 +1786,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Hasil Musyawarah';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['hasil_musyawarah'] = $this->db->get('hasil_musyawarah')->result_array();
@@ -1723,7 +1832,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Hasil Musyawarah';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM hasil_musyawarah where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -1753,7 +1861,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Hasil Musyawarah';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -1796,7 +1903,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Penilaian Tanah';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['hamus'] = $this->db->get_where('hasil_musyawarah', ['id_musyawarah' => $id])->row_array();
@@ -1846,7 +1952,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pelepasan Hak';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
@@ -1893,7 +1998,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pelepasan Hak';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM pelepasan_hak where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -1926,7 +2030,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Pelepasan Hak';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -1979,7 +2082,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Pelepasan Hak';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pelhak'] = $this->db->get_where('pelepasan_hak', ['id_pelepasan' => $id])->row_array();
@@ -2036,7 +2138,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Penyerahan Hasil';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
@@ -2083,7 +2184,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Penyerahan Hasil';
 		$data['active'] = 'hasil';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM penyerahan_hasil where id_bidang_tanah like '%" . $this->input->post('cari') . "%'";
@@ -2112,7 +2212,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Penyerahan Hasil';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
@@ -2175,7 +2274,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Penyerahan Hasil';
 		$data['active'] = 'hasil';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penhas'] = $this->db->get_where('penyerahan_hasil', ['id_penyerahan' => $id])->row_array();
@@ -2226,7 +2324,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pegawai';
 		$data['active'] = 'pegawai';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pegawai'] = $this->db->get_where('user', ['role' => 2])->result_array();
@@ -2247,7 +2344,6 @@ class Admin extends CI_Controller
         }
         $data['title'] = 'Pegawai';
 		$data['active'] = 'pegawai';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$query = "SELECT * FROM user where nip like '%" . $this->input->post('cari') . "%'";
@@ -2278,7 +2374,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah Pegawai';
 		$data['active'] = 'pegawai';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         if ($this->form_validation->run() == false) {
@@ -2320,7 +2415,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Edit Pegawai';
 		$data['active'] = 'pegawai';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['pegawai'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
@@ -2374,7 +2468,6 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Tambah User';
 		$data['active'] = 'tambah';
-        $data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         if ($this->form_validation->run() == false) {

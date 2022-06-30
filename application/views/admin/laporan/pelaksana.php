@@ -51,14 +51,21 @@
         <div class="col-8">
           
         </div>
-        <div class="col-4">
+        <div class="col-4 text-center">
           <p class="text-center">Bnjarmasin, <?= date('d-M-Y'); ?><br>
           Mengetahui, <br>
           Pejabat Pembuat Komitmen <br>
           Pengadaan Tanah</p>
-          <br>
-          <br>
-          <br>
+          <?php
+          if($ttd['status'] == 1):
+					?>
+            <img src="<?= base_url('assets/img/ttd.png');?>" alt="ttd">
+          <?php
+          elseif($ttd['status'] == 0):
+            ?>
+            <br> <br> <br>
+          <?php 
+					endif; ?>
           <p class="text-center">
             <span class=" text-decoration-underline"> Khairil Fakhmi, SE </span><br>
             NIP.17011072007011002</p>

@@ -22,6 +22,7 @@
 					<th scope="col">Pelepasan Bidang</th>
                     <th scope="col">Tipe Aset</th>
 					<th scope="col">Perkiraan Dampak</th>
+					<th scope="col">Lokasi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +40,15 @@
 					<td><?= $bidtan['pelepasan_bidang']; ?></td>
 					<td><?= $bidtan['tipe_aset']; ?></td>
                     <td><?= $bidtan['perkiraan_dampak']; ?></td>
+					<td>
+						<form action="" method="post">
+							<input type="hidden" name="koordinat" value="<?= $bidtan['koordinat']; ?>">
+							<input type="hidden" name="bidtan" value="<?= $bidtan['nama_penggarap']; ?>">
+							<button type="submit" name="submit" class="btn btn-sm btn-primary rounded-pill px-3">
+								Lihat
+							</button>
+						</form>
+					</td>
 				</tr>
 				<?php
 				}
@@ -46,4 +56,33 @@
 			</tbody>
 		</table>
 		<a href="<?= base_url('auth/cetakbidang'); ?>" class="btn btn-sm btn-primary rounded-pill px-4">Cetak</a> <a href="<?= base_url('auth/excelbidang'); ?>" class="btn btn-sm btn-primary rounded-pill px-4">Excel</a>
+
+		<br><br>
+		<?php 
+		if (isset($_POST['submit'])) {
+			?>
+			<div id="map" style="height:500px;"></div><br>
+			<script>
+				var map = L.map('map').setView([<?=$_POST['koordinat'];?>], 15);
+				
+				L.tileLayer(
+					'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2hvaXJvbnkiLCJhIjoiY2t6c2w1anA5MHFyNjJwbzF3dHRzMmlrbSJ9.CvST75663DLudTug1RmUvg', {
+						attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+						maxZoom: 18,
+						id: 'mapbox/streets-v11',
+						tileSize: 512,
+						zoomOffset: -1,
+						accessToken: 'pk.eyJ1Ijoia2hvaXJvbnkiLCJhIjoiY2t6c2w1anA5MHFyNjJwbzF3dHRzMmlrbSJ9.CvST75663DLudTug1RmUvg'
+					}).addTo(map);
+				
+				var popup = L.popup()
+					.setLatLng([<?=$_POST['koordinat'];?>])
+					.setContent("<?=$_POST['bidtan'];?>")
+					.openOn(map);
+			</script>
+
+		<?php
+		}
+		?>
 	</div>
+

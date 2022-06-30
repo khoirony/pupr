@@ -221,18 +221,6 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer', $data);
     }
 
-	public function lokasi()
-    {
-        $data['title'] = 'Peta Lokasi Bidang Tanah';
-		$data['hitung'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->num_rows();
-		$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-		$data['user'] = $user;
-
-		$this->load->view('auth/header', $data);
-        $this->load->view('auth/lokasi', $data);
-		$this->load->view('auth/footer', $data);
-    }
-
 	public function cetakbidang()
     {
 		$data['title'] = 'Data Bidang Tanah';

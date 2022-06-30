@@ -13,12 +13,14 @@
 	<script src="https://kit.fontawesome.com/c12c059ff2.js" crossorigin="anonymous"></script>
 	<title><?= $title; ?></title>
 
-  <!-- Import Map -->
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css">
-  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-
+  
+    <!-- Import Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
 </head>
 
 <body>
@@ -40,9 +42,6 @@
         </li>
 		    <li class="nav-item">
           <a class="nav-link me-3 text-white" href="<?= base_url('auth/kegiatan');?>">Data Kegiatan</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-3 text-white" href="<?= base_url('auth/lokasi');?>">Data Lokasi</a>
         </li>
 		    <li class="nav-item">
           <?php if ($hitung == 0) : ?>

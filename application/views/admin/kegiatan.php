@@ -17,6 +17,20 @@
                 </div>
             </div>
             <div class="col text-right">
+				<?php 
+				if($user['role'] == 1):
+					if($ttd['status'] == 1):
+					?>
+						<a class="btn btn-success rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/batalkegiatan'); ?>">Disetujui</a>
+					<?php
+					elseif($ttd['status'] == 0):
+					?>
+						<a class="btn btn-danger rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/setujukegiatan'); ?>">Belum</a>
+					<?php 
+					endif; ?>
+				<?php
+				endif;
+				?>
 				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporankegiatan'); ?>">Laporan Kegiatan</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahkegiatan'); ?>">Tambah Kegiatan</a>
@@ -54,7 +68,21 @@
 					<td><?= $keg['desa_kelurahan']; ?></td>
 					<td><?= $keg['kecamatan']; ?></td>
 					<td><?= $keg['kabupaten_kota']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($keg['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailkegiatan/' . $keg['id_kegiatan']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($keg['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailkegiatan/' . $keg['id_kegiatan']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
 						<a href="<?= base_url('Admin/cetakkegiatan/' . $keg['id_kegiatan']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editkegiatan/' . $keg['id_kegiatan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>

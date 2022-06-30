@@ -17,6 +17,20 @@
                 </div>
             </div>
             <div class="col text-right">
+				<?php 
+				if($user['role'] == 1):
+					if($ttd['status'] == 1):
+					?>
+						<a class="btn btn-success rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/batalpelaksana'); ?>">Disetujui</a>
+					<?php
+					elseif($ttd['status'] == 0):
+					?>
+						<a class="btn btn-danger rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/setujupelaksana'); ?>">Belum</a>
+					<?php 
+					endif; ?>
+				<?php
+				endif;
+				?>
 				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporanpelaksana'); ?>">Laporan Pelaksana</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpelaksana'); ?>">Tambah Pelaksana</a>
@@ -48,7 +62,21 @@
 					<td><?= $pel['nama_pelaksana']; ?></td>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($pel['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpelaksana/' . $pel['id_pelaksana']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($pel['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpelaksana/' . $pel['id_pelaksana']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
 						<a href="<?= base_url('Admin/cetakpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         	<a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
