@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> <?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-running"></i> <?= $title; ?></h1>
 	<br>
 	<div class="mr-3 mb-2">
         <div class="row">

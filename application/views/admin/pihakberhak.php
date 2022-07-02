@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> <?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-user-tie"></i> <?= $title; ?></h1>
 	<br>
 	<div class="mr-3 mb-2">
         <div class="row">
@@ -17,6 +17,20 @@
                 </div>
             </div>
             <div class="col text-right">
+				<?php 
+				if($user['role'] == 1):
+					if($ttd['status'] == 1):
+					?>
+						<a class="btn btn-success rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/batalpihber'); ?>">Disetujui</a>
+					<?php
+					elseif($ttd['status'] == 0):
+					?>
+						<a class="btn btn-danger rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/setujupihber'); ?>">Belum</a>
+					<?php 
+					endif; ?>
+				<?php
+				endif;
+				?>
 				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporanpihber'); ?>">Laporan Pihber</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpihber'); ?>">Tambah Pihak Berhak</a>
@@ -52,7 +66,21 @@
 					<td><?= $pihber['tanggal_lahir']; ?></td>
 					<td><?= $pihber['alamat']; ?></td>
 					<td><?= $pihber['kepemilikan']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($pihber['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpihber/' . $pihber['id_pihak']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($pihber['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpihber/' . $pihber['id_pihak']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
 						<a href="<?= base_url('Admin/cetakpihber/' . $pihber['id_pihak']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editpihber/' . $pihber['id_pihak']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>

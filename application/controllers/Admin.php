@@ -837,6 +837,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'bidang_tanah'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -854,6 +855,7 @@ class Admin extends CI_Controller
         }
 
 		$data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'bidang_tanah'])->row_array();
 
 		$this->load->view('admin/laporan/bidangtanah', $data);
     }
@@ -1012,6 +1014,54 @@ class Admin extends CI_Controller
         redirect('Admin/bidangtanah');
     }
 
+    public function setujubidtan()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'bidang_tanah');
+        $this->db->update('status');
+        redirect('Admin/bidangtanah');
+    }
+
+    public function batalbidtan()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'bidang_tanah');
+        $this->db->update('status');
+        redirect('Admin/bidangtanah');
+    }
+
+    public function setujudetailbidtan($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_bidang_tanah', $id);
+        $this->db->update('bidang_tanah');
+        redirect('Admin/bidangtanah');
+    }
+
+    public function bataldetailbidtan($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_bidang_tanah', $id);
+        $this->db->update('bidang_tanah');
+        redirect('Admin/bidangtanah');
+    }
+
 	// ###### MENU ALAS HAK ######
     
 	public function alashak()
@@ -1154,6 +1204,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pihak_berhak'] = $this->db->get('pihak_berhak')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pihak_berhak'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -1171,6 +1222,7 @@ class Admin extends CI_Controller
         }
 
 		$data['pihak_berhak'] = $this->db->get('pihak_berhak')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pihak_berhak'])->row_array();
 
 		$this->load->view('admin/laporan/pihakberhak', $data);
     }
@@ -1306,6 +1358,54 @@ class Admin extends CI_Controller
         redirect('Admin/pihakberhak');
     }
 
+    public function setujupihber()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pihak_berhak');
+        $this->db->update('status');
+        redirect('Admin/pihakberhak');
+    }
+
+    public function batalpihber()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pihak_berhak');
+        $this->db->update('status');
+        redirect('Admin/pihakberhak');
+    }
+
+    public function setujudetailpihber($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pihak', $id);
+        $this->db->update('pihak_berhak');
+        redirect('Admin/pihakberhak');
+    }
+
+    public function bataldetailpihber($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pihak', $id);
+        $this->db->update('pihak_berhak');
+        redirect('Admin/pihakberhak');
+    }
+
     // ###### MENU PENGUMUMAN ######
 
 	public function pengumuman()
@@ -1320,6 +1420,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pengumuman'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -1337,6 +1438,7 @@ class Admin extends CI_Controller
         }
 
 		$data['pengumuman'] = $this->db->get('pengumuman')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pengumuman'])->row_array();
 
 		$this->load->view('admin/laporan/pengumuman', $data);
     }
@@ -1471,6 +1573,54 @@ class Admin extends CI_Controller
         $where = array('id_pengumuman' => $id);
         $this->db->where($where);
         $this->db->delete('pengumuman');
+        redirect('Admin/pengumuman');
+    }
+
+    public function setujupengumuman()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pengumuman');
+        $this->db->update('status');
+        redirect('Admin/pengumuman');
+    }
+
+    public function batalpengumuman()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pengumuman');
+        $this->db->update('status');
+        redirect('Admin/pengumuman');
+    }
+
+    public function setujudetailpengumuman($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pengumuman', $id);
+        $this->db->update('pengumuman');
+        redirect('Admin/pengumuman');
+    }
+
+    public function bataldetailpengumuman($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pengumuman', $id);
+        $this->db->update('pengumuman');
         redirect('Admin/pengumuman');
     }
 
@@ -1615,6 +1765,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penilaian_tanah'] = $this->db->get('penilaian_tanah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penilaian_tanah'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -1632,6 +1783,7 @@ class Admin extends CI_Controller
         }
 
 		$data['penilaian_tanah'] = $this->db->get('penilaian_tanah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penilaian_tanah'])->row_array();
 
 		$this->load->view('admin/laporan/penilaiantanah', $data);
     }
@@ -1775,6 +1927,54 @@ class Admin extends CI_Controller
         redirect('Admin/penilaiantanah');
     }
 
+    public function setujupentan()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penilaian_tanah');
+        $this->db->update('status');
+        redirect('Admin/penilaiantanah');
+    }
+
+    public function batalpentan()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penilaian_tanah');
+        $this->db->update('status');
+        redirect('Admin/penilaiantanah');
+    }
+
+    public function setujudetailpentan($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penilaian', $id);
+        $this->db->update('penilaian_tanah');
+        redirect('Admin/penilaiantanah');
+    }
+
+    public function bataldetailpentan($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penilaian', $id);
+        $this->db->update('penilaian_tanah');
+        redirect('Admin/penilaiantanah');
+    }
+
     // ###### MENU HASIL MUSYAWARAH ######
 
 	public function hasilmusyawarah()
@@ -1789,6 +1989,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['hasil_musyawarah'] = $this->db->get('hasil_musyawarah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'hasil_musyawarah'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -1806,6 +2007,7 @@ class Admin extends CI_Controller
         }
 
 		$data['hasil_musyawarah'] = $this->db->get('hasil_musyawarah')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'hasil_musyawarah'])->row_array();
 
 		$this->load->view('admin/laporan/hasilmusyawarah', $data);
     }
@@ -1941,6 +2143,54 @@ class Admin extends CI_Controller
         redirect('Admin/hasilmusyawarah');
     }
 
+    public function setujuhamus()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'hasil_musyawarah');
+        $this->db->update('status');
+        redirect('Admin/hasilmusyawarah');
+    }
+
+    public function batalhamus()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'hasil_musyawarah');
+        $this->db->update('status');
+        redirect('Admin/hasilmusyawarah');
+    }
+
+    public function setujudetailhamus($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_musyawarah', $id);
+        $this->db->update('hasil_musyawarah');
+        redirect('Admin/hasilmusyawarah');
+    }
+
+    public function bataldetailhamus($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_musyawarah', $id);
+        $this->db->update('hasil_musyawarah');
+        redirect('Admin/hasilmusyawarah');
+    }
+
     // ###### MENU PELEPASAN HAK ######
 
 	public function pelepasanhak()
@@ -1955,6 +2205,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pelepasan_hak'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -1972,6 +2223,7 @@ class Admin extends CI_Controller
         }
 
 		$data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'pelepasan_hak'])->row_array();
 
 		$this->load->view('admin/laporan/pelepasanhak', $data);
     }
@@ -2127,6 +2379,54 @@ class Admin extends CI_Controller
         redirect('Admin/pelepasanhak');
     }
 
+    public function setujupelhak()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pelepasan_hak');
+        $this->db->update('status');
+        redirect('Admin/pelepasanhak');
+    }
+
+    public function batalpelhak()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'pelepasan_hak');
+        $this->db->update('status');
+        redirect('Admin/pelepasanhak');
+    }
+
+    public function setujudetailpelhak($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pelepasan', $id);
+        $this->db->update('pelepasan_hak');
+        redirect('Admin/pelepasanhak');
+    }
+
+    public function bataldetailpelhak($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_pelepasan', $id);
+        $this->db->update('pelepasan_hak');
+        redirect('Admin/pelepasanhak');
+    }
+
     // ###### MENU PENYERAHAN HASIL ######
 
 	public function penyerahanhasil()
@@ -2141,6 +2441,7 @@ class Admin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penyerahan_hasil'])->row_array();
 
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -2158,6 +2459,7 @@ class Admin extends CI_Controller
         }
 
 		$data['penyerahan_hasil'] = $this->db->get('penyerahan_hasil')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penyerahan_hasil'])->row_array();
 
 		$this->load->view('admin/laporan/penyerahanhasil', $data);
     }
@@ -2265,18 +2567,18 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('nama_penggarap', 'Nama Penggarap', 'required');
         $this->form_validation->set_rules('nomor_kwitansi', 'Nomor Kwitansi', 'required');
-        $this->form_validation->set_rules('tanggal_kwitansi', 'Tanggal Kwitansi', 'required');
-        $this->form_validation->set_rules('tanggal_pembayaran', 'Tanggal Pemayaran', 'required');
         $this->form_validation->set_rules('id_lokasi', 'Desa/Kelurahan', 'required');
-        $this->form_validation->set_rules('id_musyawarah', 'Jenis Ganti Rugi', 'required');
-        $this->form_validation->set_rules('nomor_rekening', 'Nomor Rekening', 'required');
-        $this->form_validation->set_rules('nama_bank', 'Nama Bank', 'required');
 
         $data['title'] = 'Edit Penyerahan Hasil';
 		$data['active'] = 'hasil';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['penhas'] = $this->db->get_where('penyerahan_hasil', ['id_penyerahan' => $id])->row_array();
+        $data['bidang_tanah'] = $this->db->get('bidang_tanah')->result_array();
+        $data['pelepasan_hak'] = $this->db->get('pelepasan_hak')->result_array();
+        $data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $data['lokasi'] = $this->db->get('lokasi')->result_array();
+        $pelhak = $this->db->get_where('pelepasan_hak', ['nomor_kwitansi' => $this->input->post('nomor_kwitansi')])->row_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -2285,16 +2587,25 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/penyerahanhasil', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
-				'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
-                'nomor_kwitansi' => htmlspecialchars($this->input->post('nomor_kwitansi', true)),
-                'tanggal_kwitansi' => htmlspecialchars($this->input->post('tanggal_kwitansi', true)),
-				'tanggal_pembayaran' => htmlspecialchars($this->input->post('tanggal_pembayaran', true)),
                 'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
-                'id_musyawarah' => htmlspecialchars($this->input->post('id_musyawarah', true)),
-                'nomor_rekening' => htmlspecialchars($this->input->post('nomor_rekening', true)),
-                'nama_bank' => htmlspecialchars($this->input->post('nama_bank', true)),
+				'nama_penggarap' => htmlspecialchars($this->input->post('nama_penggarap', true)),
+                'id_pelepasan' => htmlspecialchars($this->input->post('nomor_kwitansi', true)),
+                'tgl_kwitansi' => $pelhak['tanggal_kwitansi'],
+				'tgl_pembayaran' => $pelhak['tanggal_pembayaran'],
+                'gambar' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);
@@ -2310,6 +2621,54 @@ class Admin extends CI_Controller
         $where = array('id_penyerahan' => $id);
         $this->db->where($where);
         $this->db->delete('penyerahan_hasil');
+        redirect('Admin/penyerahanhasil');
+    }
+
+    public function setujupenhas()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penyerahan_hasil');
+        $this->db->update('status');
+        redirect('Admin/penyerahanhasil');
+    }
+
+    public function batalpenhas()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'penyerahan_hasil');
+        $this->db->update('status');
+        redirect('Admin/penyerahanhasil');
+    }
+
+    public function setujudetailpenhas($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penyerahan', $id);
+        $this->db->update('penyerahan_hasil');
+        redirect('Admin/penyerahanhasil');
+    }
+
+    public function bataldetailpenhas($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_penyerahan', $id);
+        $this->db->update('penyerahan_hasil');
         redirect('Admin/penyerahanhasil');
     }
 

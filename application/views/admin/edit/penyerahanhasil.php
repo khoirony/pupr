@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-chart-pie"></i> Tambah Penyerahan Hasil</h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-chart-pie"></i> Edit Penyerahan Hasil</h1>
     <br>
 
     <div class="row justify-content-center">
@@ -12,6 +12,7 @@
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Bidang Tanah</p>
                     <select class="custom-select rounded-pill px-3" id="id_bidang_tanah" name="id_bidang_tanah">
+                        <option value="<?= $penhas['id_bidang_tanah'];?>"><?= $penhas['id_bidang_tanah'];?></option>
                         <?php
                         foreach ($bidang_tanah as $bidtan) {
                         ?>
@@ -26,6 +27,7 @@
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nama Penggarap</p>
                     <select class="custom-select rounded-pill px-3" id="nama_penggarap" name="nama_penggarap">
+                        <option value="<?= $penhas['nama_penggarap'];?>"><?= $penhas['nama_penggarap'];?></option>
                         <?php
                         foreach ($pelaksana as $pel) {
                         ?>
@@ -40,6 +42,7 @@
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Kwitansi</p>
                     <select class="custom-select rounded-pill px-3" id="nomor_kwitansi" name="nomor_kwitansi">
+                        <option value="<?= $penhas['id_pelepasan'];?>"><?= $penhas['id_pelepasan'];?></option>
                         <?php
                         foreach ($pelepasan_hak as $pelhak) {
                         ?>
@@ -54,6 +57,7 @@
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Desa/Kelurahan</p>
                     <select class="custom-select rounded-pill px-3" id="id_lokasi" name="id_lokasi">
+                        <option value="<?= $penhas['id_lokasi'];?>"><?= $penhas['id_lokasi'];?></option>
                         <?php
                         foreach ($lokasi as $lok) {
                         ?>

@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> Tambah Kegiatan</h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-briefcase"></i> Tambah Kegiatan</h1>
     <br>
 
     <div class="row justify-content-center">

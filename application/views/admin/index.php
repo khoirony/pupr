@@ -14,7 +14,7 @@
                 <div class="display-4">
                     <?= $hitung_bidtan;?>
                 </div>
-                <a href="<?= base_url('Admin/verif'); ?>">
+                <a href="<?= base_url('Admin/bidangtanah'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
@@ -29,7 +29,7 @@
                 <div class="display-4">
                     <?= $hitung_lokasi;?>
                 </div>
-                <a href="<?= base_url('Admin/verif'); ?>">
+                <a href="<?= base_url('Admin/lokasi'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
@@ -44,7 +44,7 @@
                 <div class="display-4">
                     <?= $hitung_pentan;?>
                 </div>
-                <a href="<?= base_url('Admin/verif'); ?>">
+                <a href="<?= base_url('Admin/penilaiantanah'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
@@ -59,7 +59,7 @@
                 <div class="display-4">
                     <?= $hitung_penhas;?>
                 </div>
-                <a href="<?= base_url('Admin/pengumuman'); ?>">
+                <a href="<?= base_url('Admin/penyerahanhasil'); ?>">
                     <p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>

@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-map-marker-alt"></i> <?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-hourglass"></i> <?= $title; ?></h1>
 	<br>
 	<div class="mr-3 mb-2">
         <div class="row">
@@ -17,6 +17,20 @@
                 </div>
             </div>
             <div class="col text-right">
+				<?php 
+				if($user['role'] == 1):
+					if($ttd['status'] == 1):
+					?>
+						<a class="btn btn-success rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/batalpentan'); ?>">Disetujui</a>
+					<?php
+					elseif($ttd['status'] == 0):
+					?>
+						<a class="btn btn-danger rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/setujupentan'); ?>">Belum</a>
+					<?php 
+					endif; ?>
+				<?php
+				endif;
+				?>
 				<a class="btn btn-warning rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/laporanpentan'); ?>">Laporan Pentan</a>
 				<?php if($user['role'] != 1){?>
 					<a class="btn btn-primary rounded-pill pl-3 pr-3 mt-2" href="<?= base_url('Admin/tambahpentan'); ?>">Tambah Penilaian Tanah</a>
@@ -56,7 +70,21 @@
 					<td><?= $pentan['nilai_benda_lain']; ?></td>
 					<td><?= $pentan['nilai_kerugian']; ?></td>
                     <td><?= $pentan['total_nilai_ganti_rugi']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($pentan['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpentan/' . $pentan['id_penilaian']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($pentan['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpentan/' . $pentan['id_penilaian']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
 						<a href="<?= base_url('Admin/cetakpentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editpentan/' . $pentan['id_penilaian']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
