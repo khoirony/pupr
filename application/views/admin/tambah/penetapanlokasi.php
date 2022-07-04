@@ -29,7 +29,10 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Sumber Anggaran</p>
-                    <input type="text" class="form-control form-control-user" id="sumber_anggaran" name="sumber_anggaran">
+                    <select class="custom-select rounded-pill px-3" id="sumber_anggaran" name="sumber_anggaran">
+                        <option value="APBN">APBN</option>
+                        <option value="APBD">APBD</option>
+                    </select>
                     <?= form_error('sumber_anggaran', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
@@ -49,6 +52,18 @@
                     <p class="ms-3 mb-0">Nama Pemohon</p>
                     <input type="text" class="form-control form-control-user" id="nama_pemohon" name="nama_pemohon">
                     <?= form_error('nama_pemohon', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Jabatan Pemohon</p>
+                    <input type="text" class="form-control form-control-user" id="jabatan_pemohon" name="jabatan_pemohon">
+                    <?= form_error('jabatan_pemohon', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Jangka Waktu <small>(tahun)</small></p>
+                    <input type="number" class="form-control form-control-user" id="jangka_waktu" name="jangka_waktu">
+                    <?= form_error('jangka_waktu', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
                 <div class="text-center">

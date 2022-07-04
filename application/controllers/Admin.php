@@ -128,6 +128,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nilai_anggaran', 'Nilai Anggaran', 'required');
         $this->form_validation->set_rules('tanggal_permohonan', 'Tanggal Permohonan', 'required');
         $this->form_validation->set_rules('nama_pemohon', 'Nama Pemohon', 'required');
+        $this->form_validation->set_rules('jabatan_pemohon', 'Jabatan Pemohon', 'required');
+        $this->form_validation->set_rules('jangka_waktu', 'Jangka Waktu', 'required');
 
         $data['title'] = 'Tambah Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
@@ -147,7 +149,9 @@ class Admin extends CI_Controller
                 'sumber_anggaran' => htmlspecialchars($this->input->post('sumber_anggaran', true)),
                 'nilai_anggaran' => htmlspecialchars($this->input->post('nilai_anggaran', true)),
                 'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
-                'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true))
+                'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true)),
+                'jabatan_pemohon' => htmlspecialchars($this->input->post('jabatan_pemohon', true)),
+                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true))
             ];
 
             $this->db->insert('penetapan_lokasi', $data);
@@ -170,6 +174,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nilai_anggaran', 'Nilai Anggaran', 'required');
         $this->form_validation->set_rules('tanggal_permohonan', 'Tanggal Permohonan', 'required');
         $this->form_validation->set_rules('nama_pemohon', 'Nama Pemohon', 'required');
+        $this->form_validation->set_rules('jabatan_pemohon', 'Jabatan Pemohon', 'required');
+        $this->form_validation->set_rules('jangka_waktu', 'Jangka Waktu', 'required');
 
         $data['title'] = 'Edit Penetapan Lokasi';
 		$data['active'] = 'perencanaan';
@@ -191,7 +197,9 @@ class Admin extends CI_Controller
                 'sumber_anggaran' => htmlspecialchars($this->input->post('sumber_anggaran', true)),
                 'nilai_anggaran' => htmlspecialchars($this->input->post('nilai_anggaran', true)),
                 'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
-                'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true))
+                'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true)),
+                'jabatan_pemohon' => htmlspecialchars($this->input->post('jabatan_pemohon', true)),
+                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true))
             ];
 
 			$this->db->set($data);
@@ -1066,7 +1074,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
-        $data['title'] = 'Alas Hak';
+        $data['title'] = 'Alas Hak dan Benda Benda Lain';
 		$data['active'] = 'persiapan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
@@ -1086,7 +1094,7 @@ class Admin extends CI_Controller
 		}else if($this->session->userdata('role') == NULL){
             redirect('auth');
         }
-        $data['title'] = 'Alas Hak';
+        $data['title'] = 'Alas Hak dan Benda Benda Lain';
 		$data['active'] = 'persiapan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
@@ -1112,8 +1120,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('jenis_alas_hak', 'Jenis Alas Hak', 'required');
         $this->form_validation->set_rules('luas_alas_hak', 'Luas Alas Hak', 'required');
+        $this->form_validation->set_rules('jenis_benda', 'Jenis Benda', 'required');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan/Jumlah', 'required');
+        $this->form_validation->set_rules('pemilik', 'Pemilik', 'required');
 
-        $data['title'] = 'Tambah Alas Hak';
+        $data['title'] = 'Tambah Alas Hak dan Benda Benda Lain';
 		$data['active'] = 'persiapan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
@@ -1130,6 +1142,10 @@ class Admin extends CI_Controller
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'jenis_alas_hak' => htmlspecialchars($this->input->post('jenis_alas_hak', true)),
                 'luas_alas_hak' => htmlspecialchars($this->input->post('luas_alas_hak', true)),
+                'jenis_benda' => htmlspecialchars($this->input->post('jenis_benda', true)),
+                'keterangan' => htmlspecialchars($this->input->post('keterangan', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'pemilik' => htmlspecialchars($this->input->post('pemilik', true)),
             ];
 
             $this->db->insert('alas_hak', $data);
@@ -1148,8 +1164,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('id_bidang_tanah', 'Nomor Bidang Tanah', 'required|trim');
         $this->form_validation->set_rules('jenis_alas_hak', 'Jenis Alas Hak', 'required');
         $this->form_validation->set_rules('luas_alas_hak', 'Luas Alas Hak', 'required');
+        $this->form_validation->set_rules('jenis_benda', 'Jenis Benda', 'required');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan/Jumlah', 'required');
+        $this->form_validation->set_rules('pemilik', 'Pemilik', 'required');
 
-        $data['title'] = 'Edit Alas Hak';
+        $data['title'] = 'Edit Alas Hak dan Benda Benda Lain';
 		$data['active'] = 'persiapan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
@@ -1167,6 +1187,10 @@ class Admin extends CI_Controller
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'jenis_alas_hak' => htmlspecialchars($this->input->post('jenis_alas_hak', true)),
                 'luas_alas_hak' => htmlspecialchars($this->input->post('luas_alas_hak', true)),
+                'jenis_benda' => htmlspecialchars($this->input->post('jenis_benda', true)),
+                'keterangan' => htmlspecialchars($this->input->post('keterangan', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'pemilik' => htmlspecialchars($this->input->post('pemilik', true)),
             ];
 
 			$this->db->set($data);

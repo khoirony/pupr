@@ -32,6 +32,10 @@
 					<th scope="col">Nomor Bidang Tanah</th>
 					<th scope="col">Jenis Alas Hak</th>
 					<th scope="col">Luas Alas Hak</th>
+					<th scope="col">Jenis Benda</th>
+					<th scope="col">Keterangan</th>
+					<th scope="col">Satuan/Jumlah</th>
+					<th scope="col">Pemilik</th>
 					<?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
 					<?php
@@ -49,6 +53,10 @@
 					<td><?= $alha['id_bidang_tanah']; ?></td>
 					<td><?= $alha['jenis_alas_hak']; ?></td>
 					<td><?= $alha['luas_alas_hak']; ?></td>
+					<td><?= $alha['jenis_benda']; ?></td>
+					<td><?= $alha['keterangan']; ?></td>
+					<td><?= $alha['satuan']; ?></td>
+					<td><?= $alha['pemilik']; ?></td>
 					<?php if($user['role'] != 1){?>
 					<td class="text-center" style="width:100px;">
                         <a href="<?= base_url('Admin/editalha/' . $alha['id_alas_hak']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>

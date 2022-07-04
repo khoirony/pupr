@@ -26,7 +26,22 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Kabupaten/Kota</p>
-                    <input type="text" class="form-control form-control-user" id="kabupaten_kota" name="kabupaten_kota" value="<?= $lokasi['kabupaten_kota'];?>">
+                    <select class="custom-select rounded-pill px-3" id="kabupaten_kota" name="kabupaten_kota">
+                        <option value="<?= $lokasi['kabupaten_kota'];?>"><?= $lokasi['kabupaten_kota'];?></option>
+                        <option value="Banjarmasin">Banjarmasin</option>
+                        <option value="Kab. Balangan">Kab. Balangan</option>
+                        <option value="Kab. Banjar">Kab. Banjar</option>
+                        <option value="Kab. Barito Kuala">Kab. Barito Kuala</option>
+                        <option value="Kab. Hulu Sungai Selatan">Kab. Hulu Sungai Selatan</option>
+                        <option value="Kab. Hulu Sungai Tengah">Kab. Hulu Sungai Tengah</option>
+                        <option value="Kab. Hulu Sungai Utara">Kab. Hulu Sungai Utara</option>
+                        <option value="Kab. Kotabaru">Kab. Kotabaru</option>
+                        <option value="Kab. Tabalog">Kab. Tabalog</option>
+                        <option value="Kab. Tanah Bumbu">Kab. Tanah Bumbu</option>
+                        <option value="Kab. Tanah Laut">Kab. Tanah Laut</option>
+                        <option value="Kab. Tapin">Kab. Tapin</option>
+                        <option value="Kota Banjarbaru">Kota Banjarbaru</option>
+                    </select>
                     <?= form_error('kabupaten_kota', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 

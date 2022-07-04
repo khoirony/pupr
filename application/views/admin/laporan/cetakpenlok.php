@@ -73,6 +73,22 @@
           : <?= $penlok['nama_pemohon'];?>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Jabatan Pemohon
+        </div>
+        <div class="col-8">
+          : <?= $penlok['jabatan_pemohon'];?>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Jangka Waktu
+        </div>
+        <div class="col-8">
+          : <?= $penlok['jangka_waktu'];?> Tahun
+        </div>
+      </div>
     </div><br><br><br>
 
 

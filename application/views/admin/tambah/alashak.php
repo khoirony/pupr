@@ -35,6 +35,30 @@
                     <?= form_error('luas_alas_hak', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Jenis Benda</p>
+                    <input type="text" class="form-control form-control-user" id="jenis_benda" name="jenis_benda">
+                    <?= form_error('jenis_benda', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Keterangan</p>
+                    <input type="text" class="form-control form-control-user" id="keterangan" name="keterangan">
+                    <?= form_error('keterangan', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Satuan/Jumlah</p>
+                    <input type="text" class="form-control form-control-user" id="satuan" name="satuan">
+                    <?= form_error('satuan', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Pemilik</p>
+                    <input type="text" class="form-control form-control-user" id="pemilik" name="pemilik">
+                    <?= form_error('pemilik', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-user px-5 mt-3">
                         Simpan
