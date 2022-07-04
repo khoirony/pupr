@@ -28,8 +28,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?= base_url('admin/penetapanlokasi') ?>">Penetapan Lokasi</a>
                         <a class="collapse-item" href="<?= base_url('admin/lokasi') ?>">Lokasi</a>
-                        <a class="collapse-item" href="<?= base_url('admin/pelaksana') ?>">Pelaksana</a>
                         <a class="collapse-item" href="<?= base_url('admin/kegiatan') ?>">Kegiatan</a>
+                        <a class="collapse-item" href="<?= base_url('admin/pelaksana') ?>">Pelaksana</a>
                     </div>
                 </div>
             </li>

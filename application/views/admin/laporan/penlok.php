@@ -44,9 +44,9 @@
 					<td><?= $penlok['kategori_pembangunan']; ?></td>
 					<td><?= $penlok['rencana_pembangunan']; ?></td>
 					<td><?= $penlok['sumber_anggaran']; ?></td>
-					<td><?= $penlok['sumber_anggaran']; ?></td>
 					<td><?= $penlok['nilai_anggaran']; ?></td>
 					<td><?= $penlok['tanggal_permohonan']; ?></td>
+					<td><?= $penlok['nama_pemohon']; ?></td>
 				</tr>
 				<?php
 				}

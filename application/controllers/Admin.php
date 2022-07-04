@@ -686,15 +686,13 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nomor_kegiatan', 'Nomor Kegiatan', 'required');
         $this->form_validation->set_rules('rencana_penggunaan', 'Rencana Pembangunan', 'required');
         $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required');
-		$this->form_validation->set_rules('desa_kelurahan', 'Desa/Kelurahan', 'required');
-		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
-		$this->form_validation->set_rules('kabupaten_kota', 'Kabupaten/Kota', 'required');
 
         $data['title'] = 'Tambah Kegiatan';
 		$data['active'] = 'perencanaan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+        $lokasi = $this->db->get_where('lokasi', ['id_penlok' => $this->input->post('nomor_penlok')])->row_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -708,9 +706,9 @@ class Admin extends CI_Controller
                 'nomor_kegiatan' => htmlspecialchars($this->input->post('nomor_kegiatan', true)),
 				'rencana_penggunaan' => htmlspecialchars($this->input->post('rencana_penggunaan', true)),
                 'nama_kegiatan' => htmlspecialchars($this->input->post('nama_kegiatan', true)),
-                'desa_kelurahan' => htmlspecialchars($this->input->post('desa_kelurahan', true)),
-				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
-				'kabupaten_kota' => htmlspecialchars($this->input->post('kabupaten_kota', true)),
+                'desa_kelurahan' => $lokasi['desa_kelurahan'],
+				'kecamatan' => $lokasi['kecamatan'],
+				'kabupaten_kota' => $lokasi['kabupaten_kota'],
             ];
 
             $this->db->insert('kegiatan', $data);
@@ -730,9 +728,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nomor_kegiatan', 'Nomor Kegiatan', 'required');
         $this->form_validation->set_rules('rencana_penggunaan', 'Rencana Pembangunan', 'required');
         $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required');
-		$this->form_validation->set_rules('desa_kelurahan', 'Desa/Kelurahan', 'required');
-		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
-		$this->form_validation->set_rules('kabupaten_kota', 'Kabupaten/Kota', 'required');
 
         $data['title'] = 'Edit Kegiatan';
 		$data['active'] = 'perencanaan';
@@ -740,6 +735,7 @@ class Admin extends CI_Controller
 
 		$data['kegiatan'] = $this->db->get_where('kegiatan', ['id_kegiatan' => $id])->row_array();
         $data['penetapan_lokasi'] = $this->db->get('penetapan_lokasi')->result_array();
+        $lokasi = $this->db->get_where('lokasi', ['id_penlok' => $this->input->post('nomor_penlok')])->row_array();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('admin/templates/header', $data);
@@ -753,10 +749,9 @@ class Admin extends CI_Controller
                 'nomor_kegiatan' => htmlspecialchars($this->input->post('nomor_kegiatan', true)),
 				'rencana_penggunaan' => htmlspecialchars($this->input->post('rencana_penggunaan', true)),
                 'nama_kegiatan' => htmlspecialchars($this->input->post('nama_kegiatan', true)),
-                'desa_kelurahan' => htmlspecialchars($this->input->post('desa_kelurahan', true)),
-				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
-				'kabupaten_kota' => htmlspecialchars($this->input->post('kabupaten_kota', true)),
-				'id_pelaksana' => '82391'
+                'desa_kelurahan' => $lokasi['desa_kelurahan'],
+				'kecamatan' => $lokasi['kecamatan'],
+				'kabupaten_kota' => $lokasi['kabupaten_kota'],
             ];
 
 			$this->db->set($data);

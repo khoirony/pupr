@@ -42,24 +42,6 @@
                     <?= form_error('nama_kegiatan', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
-                <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Desa/Kelurahan</p>
-                    <input type="text" class="form-control form-control-user" id="desa_kelurahan" name="desa_kelurahan" value="<?= $kegiatan['desa_kelurahan'];?>">
-                    <?= form_error('desa_kelurahan', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
-                <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Kecamatan</p>
-                    <input type="text" class="form-control form-control-user" id="kecamatan" name="kecamatan" value="<?= $kegiatan['kecamatan'];?>">
-                    <?= form_error('kecamatan', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
-                <div class="form-group text-start">
-                    <p class="ms-3 mb-0">Kabupaten/Kota</p>
-                    <input type="text" class="form-control form-control-user" id="kabupaten_kota" name="kabupaten_kota" value="<?= $kegiatan['kabupaten_kota'];?>">
-                    <?= form_error('kabupaten_kota', '<small class="text-danger pl-3">', '</small>'); ?>
-                </div>
-
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-user px-5 mt-3">
                         Simpan
