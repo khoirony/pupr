@@ -51,16 +51,46 @@
 					<td><?= $peha['id_pelepasan']; ?></td>
 					<td><?= $peha['tgl_kwitansi']; ?></td>
 					<td><?= $peha['tgl_pembayaran']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
-						<a href="<?= base_url('Admin/cetakpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
-                        <a href="<?= base_url('Admin/editpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="<?= base_url('Admin/hapuspenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($peha['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpenhas/' . $peha['id_penyerahan']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($peha['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpenhas/' . $peha['id_penyerahan']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
 						<?php
-							}
+						endif;
+						?>
+						<?php if($peha['gambar'] != null): ?>
+							<a href="#id<?= $peha['id_penyerahan']; ?>" data-toggle="modal" class="btn btn-sm btn-info me-1"><i class="fas fa-image"></i></button> 
+						<?php endif; ?>
+						<a href="<?= base_url('Admin/cetakpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+						
+						<?php if($user['role'] != 1):?>
+                        	<a href="<?= base_url('Admin/editpenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        	<a href="<?= base_url('Admin/hapuspenhas/' . $peha['id_penyerahan']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							endif;
 						?>
                     </td>
 				</tr>
+
+				<!-- Modal -->
+				<div class="modal fade" id="id<?= $peha['id_penyerahan'];  ?>" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body">
+								<img src="<?= base_url('assets/img/' . $peha['gambar']); ?>" alt="gambar" class="img-thumbnail">
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<?php
 				}
 				?>

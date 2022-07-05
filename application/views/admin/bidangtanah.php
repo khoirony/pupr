@@ -89,11 +89,11 @@
 							<a href="#id<?= $bidtan['id_bidang_tanah']; ?>" data-toggle="modal" class="btn btn-sm btn-info me-1"><i class="fas fa-image"></i></button> 
 						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/editbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapusbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

@@ -53,13 +53,30 @@
 					<td><?= $penlok['sumber_anggaran']; ?></td>
 					<td><?= $penlok['nilai_anggaran']; ?></td>
 					<td><?= $penlok['tanggal_permohonan']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($penlok['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpenlok/' . $penlok['id_penlok']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($penlok['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpenlok/' . $penlok['id_penlok']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
+						<?php if($penlok['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $penlok['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpenlok/' . $penlok['id_penlok']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/editpenlok/' . $penlok['id_penlok']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspenlok/' . $penlok['id_penlok']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

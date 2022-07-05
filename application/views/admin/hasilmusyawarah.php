@@ -81,6 +81,7 @@
 						<?php
 						endif;
 						?>
+						
 						<?php if($hamus['berkas'] != null): ?>
 							<a href="<?= base_url('assets/berkas/' . $hamus['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
 						<?php endif; ?>
@@ -89,11 +90,11 @@
 						<?php endif; ?>
 						
 						<a href="<?= base_url('Admin/cetakhamus/' . $hamus['id_musyawarah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/edithamus/' . $hamus['id_musyawarah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapushamus/' . $hamus['id_musyawarah']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

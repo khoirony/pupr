@@ -47,13 +47,30 @@
 					<td><?= $pel['nama_pelaksana']; ?></td>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($pel['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpelaksana/' . $pel['id_pelaksana']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($pel['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpelaksana/' . $pel['id_pelaksana']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
+						<?php if($pel['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $pel['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         	<a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         	<a href="<?= base_url('Admin/hapuspelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

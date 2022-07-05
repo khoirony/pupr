@@ -49,11 +49,11 @@
 						<?php if($berac['berkas'] != null): ?>
 							<a href="<?= base_url('assets/berkas/' . $berac['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
 						<?php endif; ?>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
 							<a href="<?= base_url('Admin/editberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
 							<a href="<?= base_url('Admin/hapusberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

@@ -85,11 +85,11 @@
 							<a href="<?= base_url('assets/berkas/' . $p['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
 						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/editpengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

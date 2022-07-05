@@ -51,13 +51,30 @@
 					<td><?= $p['tanggal_pengumuman']; ?></td>
 					<td><?= $p['selesai_pengumuman']; ?></td>
 					<td><?= $p['id_berita']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($p['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailpengumuman/' . $p['id_pengumuman']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($p['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailpengumuman/' . $p['id_pengumuman']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
+						<?php if($p['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $p['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/editpengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapuspengumuman/' . $p['id_pengumuman']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

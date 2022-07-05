@@ -81,11 +81,11 @@
 							<a href="<?= base_url('assets/berkas/' . $pel['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
 						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         	<a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         	<a href="<?= base_url('Admin/hapuspelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>

@@ -55,13 +55,30 @@
 					<td><?= $bidtan['pelepasan_bidang']; ?></td>
 					<td><?= $bidtan['tipe_aset']; ?></td>
                     <td><?= $bidtan['perkiraan_dampak']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:130px;';} ?>">
+						<?php 
+						if($user['role'] == 1):
+							if($bidtan['status'] == 1):
+							?>
+								<a class="btn btn-sm btn-success" href="<?= base_url('Admin/bataldetailbidtan/' . $bidtan['id_bidang_tanah']); ?>"><i class="fas fa-check"></i></a>
+							<?php
+							elseif($bidtan['status'] == 0):
+							?>
+								<a class="btn btn-sm btn-danger" href="<?= base_url('Admin/setujudetailbidtan/' . $bidtan['id_bidang_tanah']); ?>"><i class="fas fa-times"></i></a>
+							<?php 
+							endif; ?>
+						<?php
+						endif;
+						?>
+						<?php if($bidtan['gambar'] != null): ?>
+							<a href="#id<?= $bidtan['id_bidang_tanah']; ?>" data-toggle="modal" class="btn btn-sm btn-info me-1"><i class="fas fa-image"></i></button> 
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
-						<?php if($user['role'] != 1){?>
+						<?php if($user['role'] != 1):?>
                         <a href="<?= base_url('Admin/editbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <a href="<?= base_url('Admin/hapusbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 						<?php
-							}
+							endif;
 						?>
                     </td>
 				</tr>
