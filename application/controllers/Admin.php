@@ -142,6 +142,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/penetapanlokasi', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_penlok' => htmlspecialchars($this->input->post('nomor_penlok', true)),
                 'kategori_pembangunan' => htmlspecialchars($this->input->post('kategori_pembangunan', true)),
@@ -151,7 +162,8 @@ class Admin extends CI_Controller
                 'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
                 'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true)),
                 'jabatan_pemohon' => htmlspecialchars($this->input->post('jabatan_pemohon', true)),
-                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true))
+                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('penetapan_lokasi', $data);
@@ -190,6 +202,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/penetapanlokasi', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_penlok' => htmlspecialchars($this->input->post('nomor_penlok', true)),
                 'kategori_pembangunan' => htmlspecialchars($this->input->post('kategori_pembangunan', true)),
@@ -199,7 +222,8 @@ class Admin extends CI_Controller
                 'tanggal_permohonan' => htmlspecialchars($this->input->post('tanggal_permohonan', true)),
                 'nama_pemohon' => htmlspecialchars($this->input->post('nama_pemohon', true)),
                 'jabatan_pemohon' => htmlspecialchars($this->input->post('jabatan_pemohon', true)),
-                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true))
+                'jangka_waktu' => htmlspecialchars($this->input->post('jangka_waktu', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);
@@ -501,11 +525,23 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/pelaksana', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_pegawai' => htmlspecialchars($this->input->post('nip', true)),
                 'nama_pelaksana' => htmlspecialchars($this->input->post('nama', true)),
                 'satgas' => htmlspecialchars($this->input->post('satgas', true)),
                 'id_kegiatan' => htmlspecialchars($this->input->post('kegiatan', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('pelaksana', $data);
@@ -539,11 +575,23 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/pelaksana', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_pegawai' => htmlspecialchars($this->input->post('nip', true)),
                 'nama_pelaksana' => htmlspecialchars($this->input->post('nama', true)),
                 'satgas' => htmlspecialchars($this->input->post('satgas', true)),
                 'id_kegiatan' => htmlspecialchars($this->input->post('kegiatan', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);

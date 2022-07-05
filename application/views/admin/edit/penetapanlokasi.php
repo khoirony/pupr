@@ -2,13 +2,13 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-compass"></i> Tambah Penetapan Lokasi</h1>
+    <h1 class="h3 mb-4 text-gray-800"><i class="fas fa-fw fa-compass"></i> Edit Penetapan Lokasi</h1>
     <br>
 
     <div class="row justify-content-center">
 
         <div class="col-md-10 text-center">
-            <form class="user" method="POST" action="">
+            <form class="user" method="POST" action="" enctype="multipart/form-data">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Penlok</p>
                     <input type="text" class="form-control form-control-user" id="nomor_penlok" name="nomor_penlok" value="<?= $penlok['id_penlok'];?>">
@@ -66,6 +66,11 @@
                     <input type="number" class="form-control form-control-user" id="jangka_waktu" name="jangka_waktu" value="<?= $penlok['jangka_waktu'];?>">
                     <?= form_error('jangka_waktu', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
+
+                <div class="form-group text-start">
+					<label class="form-label ml-3">Upload Surat Gubernur</label>
+					<input type="file" id="berkas" name="berkas" class="form-control rounded-pill">
+				</div>
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-user px-5 mt-3">
