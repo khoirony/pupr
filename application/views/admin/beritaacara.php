@@ -32,11 +32,7 @@
 					<th scope="col">Nomor Berita Acara</th>
 					<th scope="col">Jenis Berita Acara</th>
 					<th scope="col">Tanggal</th>
-                    <?php if($user['role'] != 1){?>
                     <th scope="col">Aksi</th>
-					<?php
-						}
-					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,14 +45,17 @@
 					<td><?= $berac['nomor_berita']; ?></td>
 					<td><?= $berac['jenis_berita']; ?></td>
 					<td><?= $berac['tanggal_berita']; ?></td>
-					<?php if($user['role'] != 1){?>
-					<td class="text-center" style="width:100px;">
-                        <a href="<?= base_url('Admin/editberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="<?= base_url('Admin/hapusberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:50px;';} ?>">
+						<?php if($berac['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $berac['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
+						<?php if($user['role'] != 1){?>
+							<a href="<?= base_url('Admin/editberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+							<a href="<?= base_url('Admin/hapusberita/' . $berac['id_berita']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+						<?php
+							}
+						?>
                     </td>
-					<?php
-						}
-					?>
 				</tr>
 				<?php
 				}

@@ -1574,6 +1574,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/pengumuman', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'nomor_pengumuman' => htmlspecialchars($this->input->post('nomor_pengumuman', true)),
 				'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
@@ -1581,6 +1592,7 @@ class Admin extends CI_Controller
                 'tanggal_pengumuman' => htmlspecialchars($this->input->post('tanggal_pengumuman', true)),
 				'selesai_pengumuman' => htmlspecialchars($this->input->post('tanggal_selesai', true)),
                 'id_berita' => htmlspecialchars($this->input->post('id_berita', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('pengumuman', $data);
@@ -1618,6 +1630,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/pengumuman', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'nomor_pengumuman' => htmlspecialchars($this->input->post('nomor_pengumuman', true)),
 				'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
@@ -1625,6 +1648,7 @@ class Admin extends CI_Controller
                 'tanggal_pengumuman' => htmlspecialchars($this->input->post('tanggal_pengumuman', true)),
 				'selesai_pengumuman' => htmlspecialchars($this->input->post('tanggal_selesai', true)),
                 'id_berita' => htmlspecialchars($this->input->post('id_berita', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);
@@ -1760,10 +1784,22 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/beritaacara', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'nomor_berita' => htmlspecialchars($this->input->post('nomor_berita', true)),
 				'jenis_berita' => htmlspecialchars($this->input->post('jenis_berita', true)),
                 'tanggal_berita' => htmlspecialchars($this->input->post('tanggal_berita', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('berita_acara', $data);
@@ -1796,10 +1832,22 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/beritaacara', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'nomor_berita' => htmlspecialchars($this->input->post('nomor_berita', true)),
 				'jenis_berita' => htmlspecialchars($this->input->post('jenis_berita', true)),
                 'tanggal_berita' => htmlspecialchars($this->input->post('tanggal_berita', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);
@@ -2142,6 +2190,34 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/hasilmusyawarah', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+        
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+        
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $berkas = $this->upload->data();
+            }
+            
+
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 10000;
+        
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+        
+            if ( ! $this->upload->do_upload('gambar')){
+                echo $this->upload->display_errors();
+            }else{
+                $gambar = $this->upload->data();
+            }
+            
+
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
@@ -2149,6 +2225,8 @@ class Admin extends CI_Controller
                 'nama_hadir' => htmlspecialchars($this->input->post('nama_hadir', true)),
 				'jenis_ganti_rugi' => htmlspecialchars($this->input->post('jenis_ganti_rugi', true)),
                 'hasil_musyawarah' => htmlspecialchars($this->input->post('hasil_musyawarah', true)),
+                'gambar' => $gambar['file_name'],
+                'berkas' => $berkas['file_name'],
             ];
 
             $this->db->insert('hasil_musyawarah', $data);
@@ -2185,6 +2263,34 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/hasilmusyawarah', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+        
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+        
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $berkas = $this->upload->data();
+            }
+            
+
+            $config['upload_path'] = './assets/img/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 10000;
+        
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+        
+            if ( ! $this->upload->do_upload('gambar')){
+                echo $this->upload->display_errors();
+            }else{
+                $gambar = $this->upload->data();
+            }
+            
+
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'id_lokasi' => htmlspecialchars($this->input->post('id_lokasi', true)),
@@ -2192,6 +2298,8 @@ class Admin extends CI_Controller
                 'nama_hadir' => htmlspecialchars($this->input->post('nama_hadir', true)),
 				'jenis_ganti_rugi' => htmlspecialchars($this->input->post('jenis_ganti_rugi', true)),
                 'hasil_musyawarah' => htmlspecialchars($this->input->post('hasil_musyawarah', true)),
+                'gambar' => $gambar['file_name'],
+                'berkas' => $berkas['file_name'],
             ];
 
 			$this->db->set($data);

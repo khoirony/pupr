@@ -62,7 +62,7 @@
 					<td><?= $pel['nama_pelaksana']; ?></td>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
 						<?php 
 						if($user['role'] == 1):
 							if($pel['status'] == 1):
@@ -77,6 +77,9 @@
 						<?php
 						endif;
 						?>
+						<?php if($pel['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $pel['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         	<a href="<?= base_url('Admin/editpelaksana/' . $pel['id_pelaksana']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>

@@ -70,7 +70,7 @@
 					<td><?= $bidtan['pelepasan_bidang']; ?></td>
 					<td><?= $bidtan['tipe_aset']; ?></td>
                     <td><?= $bidtan['perkiraan_dampak']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:130px;';} ?>">
 						<?php 
 						if($user['role'] == 1):
 							if($bidtan['status'] == 1):
@@ -85,6 +85,9 @@
 						<?php
 						endif;
 						?>
+						<?php if($bidtan['gambar'] != null): ?>
+							<a href="#id<?= $bidtan['id_bidang_tanah']; ?>" data-toggle="modal" class="btn btn-sm btn-info me-1"><i class="fas fa-image"></i></button> 
+						<?php endif; ?>
 						<a href="<?= base_url('Admin/cetakbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/editbidtan/' . $bidtan['id_bidang_tanah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
@@ -94,6 +97,18 @@
 						?>
                     </td>
 				</tr>
+
+				<!-- Modal -->
+				<div class="modal fade" id="id<?= $bidtan['id_bidang_tanah'];  ?>" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body">
+								<img src="<?= base_url('assets/img/' . $bidtan['gambar']); ?>" alt="gambar" class="img-thumbnail">
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<?php
 				}
 				?>

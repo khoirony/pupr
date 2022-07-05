@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-10 text-center">
-            <form class="user" method="POST" action="">
+            <form class="user" method="POST" action="" enctype="multipart/form-data">
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Nomor Berita Acara</p>
                     <input type="text" class="form-control form-control-user" id="nomor_berita" name="nomor_berita" value="<?= $berac['nomor_berita'];?>">
@@ -25,6 +25,11 @@
                     <p class="ms-3 mb-0">Tanggal</p>
                     <input type="date" class="form-control form-control-user" id="tanggal_berita" name="tanggal_berita" value="<?= $berac['tanggal_berita'];?>">
                     <?= form_error('tanggal_berita', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
+                    <label class="form-label ml-3">Upload Berkas</label>
+                    <input type="file" id="berkas" name="berkas" class="form-control rounded-pill">
                 </div>
 
                 <div class="text-center">

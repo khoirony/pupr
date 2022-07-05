@@ -66,7 +66,7 @@
 					<td><?= $hamus['nama_hadir']; ?></td>
 					<td><?= $hamus['jenis_ganti_rugi']; ?></td>
 					<td><?= $hamus['hasil_musyawarah']; ?></td>
-					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:100px;';} ?>">
+					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:130px;';}else{echo'style="width:160px;';} ?>">
 						<?php 
 						if($user['role'] == 1):
 							if($hamus['status'] == 1):
@@ -81,6 +81,13 @@
 						<?php
 						endif;
 						?>
+						<?php if($hamus['berkas'] != null): ?>
+							<a href="<?= base_url('assets/berkas/' . $hamus['berkas']); ?>" class="btn btn-sm btn-dark"><i class="fas fa-file-pdf"></i></a>
+						<?php endif; ?>
+						<?php if($hamus['gambar'] != null): ?>
+							<a href="#id<?= $hamus['id_musyawarah']; ?>" data-toggle="modal" class="btn btn-sm btn-info me-1"><i class="fas fa-image"></i></button> 
+						<?php endif; ?>
+						
 						<a href="<?= base_url('Admin/cetakhamus/' . $hamus['id_musyawarah']); ?>" class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
 						<?php if($user['role'] != 1){?>
                         <a href="<?= base_url('Admin/edithamus/' . $hamus['id_musyawarah']); ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
@@ -90,11 +97,26 @@
 						?>
                     </td>
 				</tr>
+
+				<!-- Modal -->
+				<div class="modal fade" id="id<?= $hamus['id_musyawarah'];  ?>" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body">
+								<img src="<?= base_url('assets/img/' . $hamus['gambar']); ?>" alt="gambar" class="img-thumbnail">
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<?php
 				}
 				?>
 			</tbody>
 		</table>
+
+	
+	
 
 </div>
 <!-- /.container-fluid -->
