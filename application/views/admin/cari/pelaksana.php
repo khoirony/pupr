@@ -45,7 +45,7 @@
 					<th scope="row"><?= $no++; ?></th>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['nama_pelaksana']; ?></td>
-					<td><?= $pel['id_pegawai']; ?></td>
+					<td><?= $pel['satgas']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
 					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
 						<?php 

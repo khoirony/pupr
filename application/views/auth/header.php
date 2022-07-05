@@ -37,12 +37,14 @@
         <li class="nav-item">
           <a class="nav-link me-3 text-white" href="<?= base_url('auth/profile');?>">Profile</a>
         </li>
+        <?php if($hitung != 0): ?>
         <li class="nav-item">
           <a class="nav-link me-3 text-white" href="<?= base_url('auth/bidang');?>">Data Bidang Tanah</a>
         </li>
 		    <li class="nav-item">
           <a class="nav-link me-3 text-white" href="<?= base_url('auth/kegiatan');?>">Data Kegiatan</a>
         </li>
+        <?php endif; ?>
 		    <li class="nav-item">
           <?php if ($hitung == 0) : ?>
             <a class="nav-link text-white bg-warning rounded-pill px-4 py-1 mt-1" href="<?= base_url('auth/login');?>">Login</a>

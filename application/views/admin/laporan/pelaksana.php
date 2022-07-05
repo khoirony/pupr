@@ -36,7 +36,7 @@
 					<th scope="row"><?= $no++; ?></th>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['nama_pelaksana']; ?></td>
-					<td><?= $pel['id_pegawai']; ?></td>
+					<td><?= $pel['satgas']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
 				</tr>
 				<?php

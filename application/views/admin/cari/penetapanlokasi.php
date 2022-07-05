@@ -50,9 +50,9 @@
 					<td><?= $penlok['kategori_pembangunan']; ?></td>
 					<td><?= $penlok['rencana_pembangunan']; ?></td>
 					<td><?= $penlok['sumber_anggaran']; ?></td>
-					<td><?= $penlok['sumber_anggaran']; ?></td>
 					<td><?= $penlok['nilai_anggaran']; ?></td>
 					<td><?= $penlok['tanggal_permohonan']; ?></td>
+					<td><?= $penlok['nama_pemohon']; ?></td>
 					<td class="text-center" <?php if($user['role'] != 1){ echo'style="width:170px;';}else{echo'style="width:130px;';} ?>">
 						<?php 
 						if($user['role'] == 1):

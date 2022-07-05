@@ -459,7 +459,10 @@ class Admin extends CI_Controller
         }
         $data['ttd'] = $this->db->get_where('status', ['tabel' => 'penetapan_lokasi'])->row_array();
 
-		$data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $this->db->from('pelaksana');
+        $this->db->order_by("satgas", "asc");
+        $data['pelaksana'] = $this->db->get()->result_array();
+		// $data['pelaksana'] = $this->db->get('pelaksana')->result_array();
 
 		$this->load->view('admin/laporan/pelaksana', $data);
     }

@@ -23,7 +23,15 @@
 
                 <div class="form-group text-start">
                     <p class="ms-3 mb-0">Satgas</p>
-                    <input type="text" class="form-control form-control-user" id="satgas" name="satgas">
+                    <select class="custom-select rounded-pill px-3" id="satgas" name="satgas">
+                        <option value="SATGAS A">SATGAS A</option>
+                        <option value="SATGAS B">SATGAS B</option>
+                        <option value="SATGAS C">SATGAS C</option>
+                        <option value="SATGAS D">SATGAS D</option>
+                        <option value="SATGAS E">SATGAS E</option>
+                        <option value="SATGAS F">SATGAS F</option>
+                        <option value="SATGAS G">SATGAS G</option>
+                    </select>
                     <?= form_error('satgas', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
