@@ -512,6 +512,7 @@ class Admin extends CI_Controller
         }
         $this->form_validation->set_rules('nip', 'NIP/NRP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('golongan', 'Golongan', 'required');
         $this->form_validation->set_rules('satgas', 'Satgas', 'required');
         $this->form_validation->set_rules('kegiatan', 'Kegiatan', 'required');
 
@@ -542,6 +543,7 @@ class Admin extends CI_Controller
             $data = [
                 'id_pegawai' => htmlspecialchars($this->input->post('nip', true)),
                 'nama_pelaksana' => htmlspecialchars($this->input->post('nama', true)),
+                'golongan' => htmlspecialchars($this->input->post('golongan', true)),
                 'satgas' => htmlspecialchars($this->input->post('satgas', true)),
                 'id_kegiatan' => htmlspecialchars($this->input->post('kegiatan', true)),
                 'berkas' => $uploaded_data['file_name']
@@ -562,6 +564,7 @@ class Admin extends CI_Controller
         }
         $this->form_validation->set_rules('nip', 'NIP/NRP', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('golongan', 'Golongan', 'required');
         $this->form_validation->set_rules('satgas', 'Satgas', 'required');
         $this->form_validation->set_rules('kegiatan', 'Kegiatan', 'required');
 
@@ -592,6 +595,7 @@ class Admin extends CI_Controller
             $data = [
                 'id_pegawai' => htmlspecialchars($this->input->post('nip', true)),
                 'nama_pelaksana' => htmlspecialchars($this->input->post('nama', true)),
+                'golongan' => htmlspecialchars($this->input->post('golongan', true)),
                 'satgas' => htmlspecialchars($this->input->post('satgas', true)),
                 'id_kegiatan' => htmlspecialchars($this->input->post('kegiatan', true)),
                 'berkas' => $uploaded_data['file_name']
@@ -1360,6 +1364,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/tambah/pihakberhak', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'nik' => htmlspecialchars($this->input->post('nik', true)),
@@ -1367,6 +1382,7 @@ class Admin extends CI_Controller
                 'tanggal_lahir' => htmlspecialchars($this->input->post('tanggal_lahir', true)),
 				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
                 'kepemilikan' => htmlspecialchars($this->input->post('kepemilikan', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
             $this->db->insert('pihak_berhak', $data);
@@ -1403,6 +1419,17 @@ class Admin extends CI_Controller
             $this->load->view('admin/edit/pihakberhak', $data);
             $this->load->view('admin/templates/footer');
         } else {
+            $config['upload_path'] = './assets/berkas/';
+            $config['allowed_types'] = 'pdf|csv';
+            $config['max_size'] = 10000;
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('berkas')){
+                echo $this->upload->display_errors();
+            }else{
+                $uploaded_data = $this->upload->data();
+            }
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
 				'nik' => htmlspecialchars($this->input->post('nik', true)),
@@ -1410,6 +1437,7 @@ class Admin extends CI_Controller
                 'tanggal_lahir' => htmlspecialchars($this->input->post('tanggal_lahir', true)),
 				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
                 'kepemilikan' => htmlspecialchars($this->input->post('kepemilikan', true)),
+                'berkas' => $uploaded_data['file_name']
             ];
 
 			$this->db->set($data);
@@ -2206,7 +2234,6 @@ class Admin extends CI_Controller
                 $berkas = $this->upload->data();
             }
             
-
             $config['upload_path'] = './assets/img/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 10000;
@@ -2219,7 +2246,6 @@ class Admin extends CI_Controller
             }else{
                 $gambar = $this->upload->data();
             }
-            
 
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
@@ -2269,7 +2295,6 @@ class Admin extends CI_Controller
             $config['upload_path'] = './assets/berkas/';
             $config['allowed_types'] = 'pdf|csv';
             $config['max_size'] = 10000;
-        
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
         
@@ -2279,11 +2304,9 @@ class Admin extends CI_Controller
                 $berkas = $this->upload->data();
             }
             
-
             $config['upload_path'] = './assets/img/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = 10000;
-        
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
         
@@ -2292,7 +2315,6 @@ class Admin extends CI_Controller
             }else{
                 $gambar = $this->upload->data();
             }
-            
 
             $data = [
                 'id_bidang_tanah' => htmlspecialchars($this->input->post('id_bidang_tanah', true)),
@@ -2850,6 +2872,224 @@ class Admin extends CI_Controller
         redirect('Admin/penyerahanhasil');
     }
 
+    // ###### MENU HONORARIUM PELAKSANA ######
+
+	public function honorarium()
+    {
+		if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+        $data['title'] = 'Honorarium Pelaksana';
+		$data['active'] = 'hasil';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$data['honorarium'] = $this->db->get('honorarium')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'honorarium'])->row_array();
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/honorarium', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function laporanhonorarium()
+    {
+		if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+
+		$data['honorarium'] = $this->db->get('honorarium')->result_array();
+        $data['ttd'] = $this->db->get_where('status', ['tabel' => 'honorarium'])->row_array();
+
+		$this->load->view('admin/laporan/honorarium', $data);
+    }
+
+    public function cetakhonorarium($id)
+    {
+		if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+
+		$data['honorarium'] = $this->db->get_where('honorarium', ['id_honorarium' => $id])->row_array();
+
+		$this->load->view('admin/laporan/cetakhonorarium', $data);
+    }
+
+    public function carihonorarium()
+    {
+		if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+        $data['title'] = 'Honorarium Pelaksana';
+		$data['active'] = 'hasil';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$query = "SELECT * FROM honorarium where nama_pelaksana like '%" . $this->input->post('cari') . "%'";
+        $data['cari'] = $this->db->query($query)->result_array();
+        $data['hitung'] = $this->db->query($query)->num_rows();
+        $data['text'] = $this->input->post('cari');
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/cari/honorarium', $data);
+		$this->load->view('admin/templates/footer', $data);
+    }
+
+    public function tambahhonorarium()
+    {
+		if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+        $this->form_validation->set_rules('nama_pelaksana', 'Nama Pelaksana', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('uang_harian', 'Uang Harian', 'required');
+        $this->form_validation->set_rules('pajak', 'Pajak', 'required');
+
+        $data['title'] = 'Tambah Honorarium Pelaksana';
+		$data['active'] = 'hasil';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $pelaksana = $this->db->get_where('pelaksana', ['nama_pelaksana' => $this->input->post('nama_pelaksana')])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('admin/tambah/honorarium', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $data = [
+                'nama_pelaksana' => htmlspecialchars($this->input->post('nama_pelaksana', true)),
+                'golongan' => $pelaksana['golongan'],
+                'satgas' => $pelaksana['satgas'],
+				'kegiatan' => $pelaksana['id_kegiatan'],
+                'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                'uang_harian' => htmlspecialchars($this->input->post('uang_harian', true)),
+				'pajak' => htmlspecialchars($this->input->post('pajak', true)),
+                'nilai_bersih' => $this->input->post('uang_harian')-$this->input->post('pajak'),
+            ];
+
+            $this->db->insert('honorarium', $data);
+            
+            redirect('Admin/honorarium');
+        }
+    }
+
+    public function edithonorarium($id)
+    {
+        if($this->session->userdata('role') > 2){
+			redirect('auth');
+		}else if($this->session->userdata('role') == NULL){
+            redirect('auth');
+        }
+        $this->form_validation->set_rules('nama_pelaksana', 'Nama Pelaksana', 'required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+        $this->form_validation->set_rules('uang_harian', 'Uang Harian', 'required');
+        $this->form_validation->set_rules('pajak', 'Pajak', 'required');
+
+        $data['title'] = 'Edit Honorarium Pelaksana';
+		$data['active'] = 'hasil';
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$data['honorarium'] = $this->db->get_where('honorarium', ['id_honorarium' => $id])->row_array();
+        $data['pelaksana'] = $this->db->get('pelaksana')->result_array();
+        $pelaksana = $this->db->get_where('pelaksana', ['nama_pelaksana' => $this->input->post('nama_pelaksana')])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/templates/sidebar', $data);
+            $this->load->view('admin/templates/topbar', $data);
+            $this->load->view('admin/edit/honorarium', $data);
+            $this->load->view('admin/templates/footer');
+        } else {
+            $data = [
+                'nama_pelaksana' => htmlspecialchars($this->input->post('nama_pelaksana', true)),
+                'golongan' => $pelaksana['golongan'],
+                'satgas' => $pelaksana['satgas'],
+				'kegiatan' => $pelaksana['id_kegiatan'],
+                'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                'uang_harian' => htmlspecialchars($this->input->post('uang_harian', true)),
+				'pajak' => htmlspecialchars($this->input->post('pajak', true)),
+                'nilai_bersih' => $this->input->post('uang_harian')-$this->input->post('pajak'),
+            ];
+
+			$this->db->set($data);
+            $this->db->where('id_honorarium', $id);
+            $this->db->update('honorarium');
+            
+            redirect('Admin/honorarium');
+        }
+    }
+
+    public function hapushonorarium($id)
+    {
+        $where = array('id_honorarium' => $id);
+        $this->db->where($where);
+        $this->db->delete('honorarium');
+        redirect('Admin/honorarium');
+    }
+
+    public function setujuhonorarium()
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'honorarium');
+        $this->db->update('status');
+        redirect('Admin/honorarium');
+    }
+
+    public function batalhonorarium()
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('tabel', 'honorarium');
+        $this->db->update('status');
+        redirect('Admin/honorarium');
+    }
+
+    public function setujudetailhonorarium($id)
+    {
+        $data = [
+            'status' => 1
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_honorarium', $id);
+        $this->db->update('honorarium');
+        redirect('Admin/honorarium');
+    }
+
+    public function bataldetailhonorarium($id)
+    {
+        $data = [
+            'status' => 0
+        ];
+
+        $this->db->set($data);
+        $this->db->where('id_honorarium', $id);
+        $this->db->update('honorarium');
+        redirect('Admin/honorarium');
+    }
+
     // ###### MENU PEGAWAI ######
 
 	public function pegawai()
@@ -3017,12 +3257,16 @@ class Admin extends CI_Controller
             $data = [
                 'username' => htmlspecialchars($this->input->post('username', true)),
 				'password' => htmlspecialchars($this->input->post('password', true)),
-                'role' => 1
+                'role' => htmlspecialchars($this->input->post('role', true)),
             ];
 
             $this->db->insert('user', $data);
             
-            $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Akun Admin Berhasil dibuat</div>');
+            if($this->input->post('role') == 1){ $role = 'Admin'; }
+            else if($this->input->post('role') == 2){ $role = 'Pegawai'; }
+            else if($this->input->post('role') == 3){ $role = 'Pengunjung'; }
+
+            $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Akun '.$role.' Berhasil dibuat</div>');
             redirect('Admin/tambahuser');
         }
     }

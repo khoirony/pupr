@@ -8,29 +8,21 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Laporan Penugasan Pelaksana</title>
+    <title>Detail Laporan Honorarium Pelaksana</title>
   </head>
   <body>
     <div class="container-fluid text-center">
       <img src="<?= base_url('assets/img/kop.jpg');?>" alt="kop" class="border-bottom text-center border-bottom">
     </div><br>
-    <h5 class="text-center fw-bold">Detail Laporan Penugasan Pelaksana</h5>
+    <h5 class="text-center fw-bold">Detail Laporan Honorarium Pelaksana</h5>
     <br>
     <div class="container-fluid px-5 fs-5">
       <div class="row mb-3">
         <div class="col-4">
-          NIP
+          Nama Pelaksana
         </div>
         <div class="col-8">
-          : <?= $pelaksana['id_pegawai'];?>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-4">
-          Nama
-        </div>
-        <div class="col-8">
-          : <?= $pelaksana['nama_pelaksana'];?>
+          : <?= $honorarium['nama_pelaksana'];?>
         </div>
       </div>
       <div class="row mb-3">
@@ -38,7 +30,7 @@
           Golongan
         </div>
         <div class="col-8">
-          : <?= $pelaksana['golongan'];?>
+          : <?= $honorarium['golongan'];?>
         </div>
       </div>
       <div class="row mb-3">
@@ -46,7 +38,15 @@
           Satgas
         </div>
         <div class="col-8">
-          : <?= $pelaksana['satgas'];?>
+          : <?= $honorarium['satgas'];?>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Jabatan
+        </div>
+        <div class="col-8">
+          : <?= $honorarium['jabatan'];?>
         </div>
       </div>
       <div class="row mb-3">
@@ -54,7 +54,31 @@
           Kegiatan
         </div>
         <div class="col-8">
-          : <?= $pelaksana['id_kegiatan'];?>
+          : <?= $honorarium['kegiatan'];?>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Uang Harian
+        </div>
+        <div class="col-8">
+          : <?= $honorarium['uang_harian'];?>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Pajak PPH
+        </div>
+        <div class="col-8">
+          : <?= $honorarium['pajak'];?>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          Nilai Bersih
+        </div>
+        <div class="col-8">
+          : <?= $honorarium['nilai_bersih'];?>
         </div>
       </div>
     </div><br><br><br><br><br><br>
@@ -70,11 +94,11 @@
           Pejabat Pembuat Komitmen <br>
           Pengadaan Tanah</p>
           <?php
-          if($pelaksana['status'] == 1):
+          if($honorarium['status'] == 1):
 					?>
           <img src="<?= base_url('assets/img/ttd.png');?>" alt="ttd">
           <?php
-            elseif($pelaksana['status'] == 0):
+            elseif($honorarium['status'] == 0):
             ?>
           <br> <br> <br>
           <?php 

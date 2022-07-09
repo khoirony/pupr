@@ -23,6 +23,7 @@
 					<th scope="col">No</th>
 					<th scope="col">NIP/NRP</th>
 					<th scope="col">Nama</th>
+          <th scope="col">Gol</th>
 					<th scope="col">Satgas</th>
 					<th scope="col">Kegiatan</th>
 				</tr>
@@ -36,7 +37,8 @@
 					<th scope="row"><?= $no++; ?></th>
 					<td><?= $pel['id_pegawai']; ?></td>
 					<td><?= $pel['nama_pelaksana']; ?></td>
-					<td><?= $pel['satgas']; ?></td>
+					<td><?= $pel['golongan']; ?></td>
+          <td><?= $pel['satgas']; ?></td>
 					<td><?= $pel['id_kegiatan']; ?></td>
 				</tr>
 				<?php

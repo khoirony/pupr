@@ -65,6 +65,7 @@
 						<a class="collapse-item" href="<?= base_url('admin/hasilmusyawarah') ?>">Hasil Musyawarah</a>
 						<a class="collapse-item" href="<?= base_url('admin/pelepasanhak') ?>">Pelepasan Hak</a>
 						<a class="collapse-item" href="<?= base_url('admin/penyerahanhasil') ?>">Penyerahan Hasil</a>
+                        <a class="collapse-item" href="<?= base_url('admin/honorarium') ?>">Honorarium Pelaksana</a>
                     </div>
                 </div>
             </li>

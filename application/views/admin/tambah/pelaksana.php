@@ -22,6 +22,12 @@
                 </div>
 
                 <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Golongan</p>
+                    <input type="text" class="form-control form-control-user" id="golongan" name="golongan">
+                    <?= form_error('golongan', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
+                <div class="form-group text-start">
                     <p class="ms-3 mb-0">Satgas</p>
                     <select class="custom-select rounded-pill px-3" id="satgas" name="satgas">
                         <option value="SATGAS A">SATGAS A</option>

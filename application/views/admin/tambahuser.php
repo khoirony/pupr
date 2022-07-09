@@ -25,6 +25,16 @@
                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
 
+                <div class="form-group text-start">
+                    <p class="ms-3 mb-0">Role User</p>
+                    <select class="custom-select rounded-pill px-3" id="role" name="role">
+                        <option value="1">Admin</option>
+                        <option value="2">Pegawai</option>
+                        <option value="3">Pengunjung</option>
+                    </select>
+                    <?= form_error('role', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-user px-5 mt-3">
                         Simpan
